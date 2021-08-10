@@ -48,4 +48,7 @@ dependencies {
 //    implementation 'com.amplifyframework:aws-datastore:1.6.8'
 //    implementation 'com.amplifyframework:aws-auth-cognito:1.6.8'
 
+    implementation 'com.github.blackfizz:eazegraph:1.2.2@aar' //bar graph
+    implementation 'com.nineoldandroids:library:2.4.0' //bar graph
+    implementation 'com.github.VaibhavLakhera:Circular-Progress-View:0.1.2' //circle progress bar
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- https://github.com/VaibhavLakhera/Circular-Progress-View -->
+    <com.vaibhavlakhera.circularprogressview.CircularProgressView
+        android:id="@+id/cpb_circlebar"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="8dp"
+        android:padding="5dp"
+        app:animate="true"
+        app:animateDuration="600"
+        app:fillColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:progressColor="#0080FF"
+        app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+        app:progressRoundCap="true"
+        app:progressTextColor="#0080FF"
+        app:progressTextEnabled="true"
+        app:progressTextSize="32sp"
+        app:progressTextType="progress"
+        app:progressValue="1500"
+        app:progressWidth="20dp"
+        app:startAngle="270"
+        app:totalColor="#A9D0F5"
+        app:totalValue="10000"
+        app:totalWidth="20dp"
+        tools:ignore="MissingConstraints" />
+</androidx.constraintlayout.widget.ConstraintLayout>
