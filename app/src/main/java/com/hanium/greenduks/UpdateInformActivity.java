@@ -18,10 +18,11 @@ public class UpdateInformActivity extends AppCompatActivity {
         setContentView(R.layout.activity_updateinform);
 
         EditText etName = findViewById(R.id.etName);
+        EditText etNickName = findViewById(R.id.etNickName);
         EditText etEmail = findViewById(R.id.etEmail);
         EditText etPw = findViewById(R.id.etPw);
         EditText etConfirmPw = findViewById(R.id.etConfirmPw);
-        EditText etAddress = findViewById(R.id.etAddress);
+        EditText etPhone = findViewById(R.id.etPhone);
         Button btnCompUpdate = findViewById(R.id.btnCompUpdate);
         Button btnWithdrawal = findViewById(R.id.btnWithdrawal);
 

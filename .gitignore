@@ -13,6 +13,8 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/main/res/values/keys.xml
+
 
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
@@ -34,3 +36,4 @@ amplify-gradle-config.json
 amplifytools.xcconfig
 .secret-*
 #amplify-do-not-edit-end
+
