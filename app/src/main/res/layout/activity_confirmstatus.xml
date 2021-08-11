@@ -10,7 +10,6 @@
         android:id="@+id/toolbar5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#C7D7E3"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,6 +35,7 @@
         android:layout_marginLeft="75dp"
         android:layout_marginTop="100dp"
         android:text="김동덕"
+        android:textColor="#0080FF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
 
@@ -58,6 +58,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="100dp"
         android:text="2021.07.17"
+        android:textColor="#0080FF"
         app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
 
@@ -77,7 +78,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="누적 배출 무게"
+        android:text="오늘의 배출 무게"
+        android:textColor="#0080FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCurrentDate" />
@@ -90,6 +92,7 @@
         android:layout_marginLeft="155dp"
         android:layout_marginTop="15dp"
         android:text="0.5"
+        android:textColor="#CB0080FF"
         android:textSize="50sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -102,6 +105,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="35dp"
         android:text="kg"
+        android:textColor="#CB0080FF"
         android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@+id/tvTotalWeight"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -119,9 +123,48 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTotalWeight">
 
         <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:background="#CB0080FF"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="누적 배출 무게" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCumulativeWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="5"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="kg"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+
+        </TableRow>
+
+        <TableRow
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginBottom="20dp">
+            android:layout_marginBottom="10dp"
+            android:background="#CB0080FF"
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/textView27"
@@ -131,21 +174,39 @@
                 android:layout_marginRight="30dp"
                 android:text="누적 포인트" />
 
-            <TextView
-                android:id="@+id/tvCumulativePoint2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="500"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvCumulativePoint2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="500"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView18"
+                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="P"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
 
         </TableRow>
 
         <TableRow
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#CB0080FF"
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/textView26"
@@ -159,7 +220,8 @@
                 android:id="@+id/tvLatestAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="경기도 고양시 일산서구 킨텍스로" />
+                android:text="경기도 고양시 일산서구 킨텍스로"
+                android:textColor="#FFFFFF" />
         </TableRow>
 
     </TableLayout>
