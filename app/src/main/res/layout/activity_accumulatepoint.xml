@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
-        android:background="#D4DFE4"
+        android:background="@drawable/layout_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,7 +24,7 @@
             android:layout_marginLeft="70dp"
             android:layout_marginTop="50dp"
             android:text="배출한 종이팩"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="100"
+            android:textColor="#0080FF"
             android:textSize="60sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:text="포인트가 적립되었습니다"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvPoint" />
@@ -59,7 +60,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="50dp"
             android:text="누적 포인트"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView17" />
@@ -73,7 +74,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="50dp"
             android:text="500"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView18"
             app:layout_constraintTop_toBottomOf="@+id/textView17" />
@@ -86,7 +87,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="50dp"
             android:text="0.2"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/textView15"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -98,7 +99,7 @@
             android:layout_marginEnd="70dp"
             android:layout_marginRight="70dp"
             android:text="kg"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvWeight"
             app:layout_constraintTop_toTopOf="parent" />
@@ -111,7 +112,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="30dp"
         android:text="확인"
-        app:backgroundTint="#4B8FAE"
+        app:backgroundTint="#0080FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
