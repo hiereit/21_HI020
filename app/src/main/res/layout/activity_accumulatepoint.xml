@@ -10,11 +10,23 @@
         android:id="@+id/constraintLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
         android:background="@drawable/layout_background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/textView15"
@@ -32,24 +44,24 @@
             android:id="@+id/tvPoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:text="100"
             android:textColor="#0080FF"
             android:textSize="60sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout2"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />
 
         <TextView
             android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="25dp"
             android:text="포인트가 적립되었습니다"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPoint" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
         <TextView
             android:id="@+id/textView18"
@@ -110,10 +122,12 @@
         android:id="@+id/btnConfirmPoint"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="5dp"
+        android:onClick="onClick"
         android:text="확인"
         app:backgroundTint="#0080FF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

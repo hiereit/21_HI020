@@ -6,6 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/circle_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCurrentDate">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar5"
         android:layout_width="match_parent"
@@ -33,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="75dp"
         android:layout_marginLeft="75dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:text="김동덕"
         android:textColor="#0080FF"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:text="님의"
         app:layout_constraintStart_toEndOf="@+id/tvUserName"
         app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
@@ -56,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:text="2021.07.17"
         android:textColor="#0080FF"
         app:layout_constraintStart_toEndOf="@+id/textView19"
@@ -68,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:text="일자 배출 현황"
         app:layout_constraintStart_toEndOf="@+id/tvCurrentDate"
         app:layout_constraintTop_toBottomOf="@+id/toolbar5" />
@@ -77,24 +90,24 @@
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="65dp"
         android:text="오늘의 배출 무게"
         android:textColor="#0080FF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCurrentDate" />
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout2" />
 
     <TextView
         android:id="@+id/tvTotalWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="155dp"
-        android:layout_marginLeft="155dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginStart="70dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="13dp"
         android:text="0.5"
-        android:textColor="#CB0080FF"
+        android:textColor="#0080FF"
         android:textSize="50sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
     <TextView
@@ -103,9 +116,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="33dp"
         android:text="kg"
-        android:textColor="#CB0080FF"
+        android:textColor="#0080FF"
         android:textSize="30sp"
         app:layout_constraintStart_toEndOf="@+id/tvTotalWeight"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -115,12 +128,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="90dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotalWeight">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <TableRow
             android:layout_width="match_parent"
@@ -225,4 +238,5 @@
         </TableRow>
 
     </TableLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
