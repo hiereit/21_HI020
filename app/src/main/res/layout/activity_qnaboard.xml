@@ -53,7 +53,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/etQna_title"
+            android:id="@+id/tvQnaBoard_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
@@ -68,7 +68,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/etQnaBoard_question"
+        android:id="@+id/tvQnaBoard_question"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:layout_marginStart="16dp"
@@ -97,7 +97,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tvQnaBoard_answer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etQnaBoard_question"
+        app:layout_constraintTop_toBottomOf="@+id/tvQnaBoard_question"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView

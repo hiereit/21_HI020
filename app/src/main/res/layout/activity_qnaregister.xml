@@ -52,13 +52,14 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/etQna_title2"
+            android:id="@+id/etQnaRegister_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:background="@null"
             android:ems="10"
             android:hint="제목을 입력하세요"
             android:inputType="textPersonName"
@@ -66,7 +67,7 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/etQnaBoard_question2"
+        android:id="@+id/etQnaRegister_question"
         android:layout_width="0dp"
         android:layout_height="400dp"
         android:layout_marginStart="16dp"
@@ -83,10 +84,10 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnQnaBoard_register2"
+        android:id="@+id/btnQnaBoard_register"
         android:layout_width="130dp"
         android:layout_height="45dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/buttonshape"
         android:stateListAnimator="@null"
         android:text="등록"
@@ -95,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etQnaBoard_question2"
+        app:layout_constraintTop_toBottomOf="@+id/etQnaRegister_question"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
