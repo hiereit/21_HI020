@@ -131,6 +131,7 @@
             android:id="@+id/btnCompUpdate"
             android:layout_width="match_parent"
             android:layout_height="60dp"
+            android:onClick="onClick"
             android:text="수정 완료"
             app:backgroundTint="#0080ff" />
 
@@ -139,6 +140,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="10dp"
+            android:onClick="onClick"
             android:text="회원 탈퇴"
             app:backgroundTint="#0080ff" />
     </LinearLayout>
