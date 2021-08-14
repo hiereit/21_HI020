@@ -19,6 +19,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+    //fragmentActivity
     private GoogleMap map;
     private FusedLocationProviderClient fusedLocationClient;
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
@@ -36,7 +38,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_map);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        //fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+//        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -67,7 +71,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 });
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(37.56, 126.97))
-                .title("Marker"));
+                .title("Marker"));//수거함 위치
     }
 
     private void startLocationUpdates() {
