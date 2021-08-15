@@ -7,7 +7,6 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.1.2"
-//        classpath 'com.amplifyframework:amplify-tools-gradle-plugin:1.0.2'
 
         classpath 'com.android.tools.build:gradle:3.4.0' //bar graph
         classpath 'com.google.gms:google-services:4.3.2' //bar graph
@@ -29,5 +28,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-
-//apply plugin: 'com.amplifyframework.amplifytools'

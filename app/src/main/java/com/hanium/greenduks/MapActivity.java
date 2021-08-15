@@ -58,7 +58,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         else {
             ActivityCompat.requestPermissions( this, REQUIRED_PERMISSIONS, 100);
         }
-        fusedLocationClient.getLastLocation()
+       /* fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
                     public void onSuccess(Location location) {
@@ -68,7 +68,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                             map.moveCamera(cameraUpdate);
                         }
                     }
-                });
+                });*/
         map.addMarker(new MarkerOptions()
                 .position(new LatLng(37.56, 126.97))
                 .title("Marker"));//수거함 위치

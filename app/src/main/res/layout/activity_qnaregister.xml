@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar10"
+        android:id="@+id/toolbar12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
@@ -17,60 +17,59 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textView35"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="문의하기"
+        android:text="문의 하기"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar10"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout5"
+        android:id="@+id/linearLayout6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:foregroundGravity="center_vertical"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar10">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar12">
 
         <TextView
-            android:id="@+id/textView9"
+            android:id="@+id/textView37"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="24dp"
-            android:layout_marginLeft="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:gravity="center_vertical"
             android:text="Q"
             android:textColor="#0080FF"
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/tvQnaBoard_title"
+        <EditText
+            android:id="@+id/etQnaRegister_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:background="@null"
             android:ems="10"
-            android:gravity="center_vertical"
-            android:hint="제목"
+            android:hint="제목을 입력하세요"
             android:inputType="textPersonName"
             android:textSize="16sp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvQnaBoard_question"
+    <EditText
+        android:id="@+id/etQnaRegister_question"
         android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -82,37 +81,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
-        android:text="A"
-        android:textColor="#0080FF"
-        android:textSize="30sp"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnQnaBoard_register"
+        android:layout_width="130dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/buttonshape"
+        android:stateListAnimator="@null"
+        android:text="등록"
+        android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/tvQnaBoard_answer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvQnaBoard_question"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/tvQnaBoard_answer"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="36dp"
-        android:background="@drawable/edit_background"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etQnaRegister_question"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
