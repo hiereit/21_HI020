@@ -1,28 +1,44 @@
 package com.hanium.greenduks;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
     private String[] members = new String[]{"일반 회원", "수거 업체", "관리자"};
     private int member;
+    DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        ImageView iv_menu = findViewById(R.id.iv_menu);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        TextView toolbar_name = findViewById(R.id.tvToolbar_name);
+
+        initializeLayout(iv_menu, drawerLayout, toolbar_name, "로그인");
+        setNavigationViewListener();
 
         EditText etLoginId = findViewById(R.id.etLoginId);
         EditText etLoginPw = findViewById(R.id.etLoginPw);
@@ -62,5 +78,18 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Log.d("yyj", "item: " + item);
+        Intent intent = nextIntent(item, this, drawerLayout);
+        startActivity(intent);
+        return true;
+    }
+
+    public void setNavigationViewListener() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 }
