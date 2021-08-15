@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
         iv_menu = findViewById(R.id.iv_menu);
         drawerLayout = findViewById(R.id.drawer_layout);
-
         iv_menu.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.LEFT));
     }
 }

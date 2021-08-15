@@ -1,9 +1,12 @@
 package com.hanium.greenduks;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.vaibhavlakhera.circularprogressview.CircularProgressView;
 
@@ -12,6 +15,9 @@ import org.eazegraph.lib.models.BarModel;
 
 public class PointConfirmActivity extends AppCompatActivity{
 
+    ImageView iv_menu;
+    DrawerLayout drawerLayout;
+
     CircularProgressView circularProgressView;
     BarChart mBarChart;
 
@@ -19,6 +25,10 @@ public class PointConfirmActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pointconfirm);
+
+        iv_menu = findViewById(R.id.iv_menu);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        iv_menu.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.LEFT));
 
 
         circularProgressView=findViewById(R.id.cpb_circlebar);
