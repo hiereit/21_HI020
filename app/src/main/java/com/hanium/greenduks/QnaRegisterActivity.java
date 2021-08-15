@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,15 +27,13 @@ public class QnaRegisterActivity extends AppCompatActivity {
         iv_menu = findViewById(R.id.iv_menu);
         drawerLayout = findViewById(R.id.drawer_layout);
         iv_menu.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.LEFT));
-
+        TextView toolbar_name = findViewById(R.id.tvToolbar_name);
+        toolbar_name.setText("문의하기");
 
         registerBtn = (Button)findViewById(R.id.btnQnaBoard_register);
-        registerBtn.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), QnaListActivity.class);
-                startActivity(intent);
-            }
+        registerBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), QnaListActivity.class);
+            startActivity(intent);
         });
     }
 
