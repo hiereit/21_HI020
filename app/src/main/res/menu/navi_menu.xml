@@ -9,7 +9,7 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/navi_menu_"
+        android:id="@+id/navi_menu_map"
         android:title="수거함 찾기"
         android:icon="@drawable/ic_baseline_place_24"
         app:showAsAction="never"/>
@@ -27,8 +27,8 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/navi_menu_setting"
+        android:id="@+id/navi_menu_license"
         android:title="설정"
-        android:icon="@drawable/ic_baseline_settings_24"
+        android:icon="@drawable/license_img"
         app:showAsAction="never"/>
 </menu>
