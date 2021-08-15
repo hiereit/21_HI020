@@ -23,8 +23,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, ActivityCompat.OnRequestPermissionsResultCallback {
-    //fragmentActivity
+public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     private GoogleMap map;
     private LocationManager locMan;
