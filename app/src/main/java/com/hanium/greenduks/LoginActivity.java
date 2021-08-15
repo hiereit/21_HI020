@@ -1,5 +1,6 @@
 package com.hanium.greenduks;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,14 +39,18 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                member = 0;
             }
         });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Class nextActivity = null;
+                if (member == 0) {
+                    nextActivity = MainActivity.class;
+                }
+                Intent intent = new Intent(LoginActivity.this, nextActivity);
                 startActivity(intent);
             }
         });
