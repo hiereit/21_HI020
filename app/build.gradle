@@ -49,7 +49,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     implementation('com.journeyapps:zxing-android-embedded:4.2.0') { transitive = false }
     implementation 'com.google.zxing:core:3.4.0'
-
+//
 //    implementation 'com.amplifyframework:core:1.6.8'
 
 //    implementation 'com.amplifyframework:aws-api:1.6.8'
