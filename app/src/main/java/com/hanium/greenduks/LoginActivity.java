@@ -23,7 +23,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class LoginActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
+public class LoginActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener {
     private String[] members = new String[]{"일반 회원", "수거 업체", "관리자"};
     private int member;
     DrawerLayout drawerLayout;
@@ -66,6 +66,12 @@ public class LoginActivity extends AppCompatActivity implements NavigationInterf
                 if (member == 0) {
                     nextActivity = MainActivity.class;
                 }
+                else if (member == 1) {
+                    nextActivity = CenterMainActivity.class;
+                }
+                else {
+                    nextActivity = QnaListActivity.class;
+                }
                 Intent intent = new Intent(LoginActivity.this, nextActivity);
                 startActivity(intent);
             }
@@ -82,7 +88,6 @@ public class LoginActivity extends AppCompatActivity implements NavigationInterf
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Log.d("yyj", "item: " + item);
         Intent intent = nextIntent(item, this, drawerLayout);
         startActivity(intent);
         return true;
