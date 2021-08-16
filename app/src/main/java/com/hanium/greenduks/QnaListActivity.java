@@ -23,6 +23,7 @@ public class QnaListActivity extends AppCompatActivity implements NavigationInte
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
+    ImageView iv_qr;
 
     RecyclerView qRecyclerView;
     QnaAdapter qRecyclerAdapter;
@@ -39,6 +40,12 @@ public class QnaListActivity extends AppCompatActivity implements NavigationInte
         TextView toolbar_name = findViewById(R.id.tvToolbar_name);
         initializeLayout(iv_menu, drawerLayout, toolbar_name, "문의내역");
         setNavigationViewListener();
+
+        iv_qr = findViewById(R.id.iv_qr);
+        iv_qr.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
+            startActivity(intent);
+        });
 
         qRecyclerView = (RecyclerView)findViewById(R.id.rvQna);
 

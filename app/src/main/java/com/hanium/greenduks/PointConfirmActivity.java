@@ -26,6 +26,7 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
+    ImageView iv_qr;
 
     CircularProgressView circularProgressView;
     BarChart mBarChart;
@@ -47,7 +48,7 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
         initializeLayout(iv_menu, drawerLayout, toolbar_name, "포인트 확인");
         setNavigationViewListener();
 
-        ImageView iv_qr = findViewById(R.id.iv_qr);
+        iv_qr = findViewById(R.id.iv_qr);
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);

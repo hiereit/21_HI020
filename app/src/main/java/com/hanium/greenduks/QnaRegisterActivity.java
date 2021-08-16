@@ -22,6 +22,7 @@ public class QnaRegisterActivity extends AppCompatActivity implements Navigation
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
+    ImageView iv_qr;
 
     Button registerBtn;
 
@@ -36,6 +37,12 @@ public class QnaRegisterActivity extends AppCompatActivity implements Navigation
         TextView toolbar_name = findViewById(R.id.tvToolbar_name);
         initializeLayout(iv_menu, drawerLayout, toolbar_name, "문의하기");
         setNavigationViewListener();
+
+        iv_qr = findViewById(R.id.iv_qr);
+        iv_qr.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
+            startActivity(intent);
+        });
 
         registerBtn = (Button)findViewById(R.id.btnQnaBoard_register);
         registerBtn.setOnClickListener(v -> {

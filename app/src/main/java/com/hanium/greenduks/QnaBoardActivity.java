@@ -19,6 +19,7 @@ public class QnaBoardActivity extends AppCompatActivity implements NavigationInt
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
+    ImageView iv_qr;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +33,12 @@ public class QnaBoardActivity extends AppCompatActivity implements NavigationInt
 
         initializeLayout(iv_menu, drawerLayout, toolbar_name, "문의하기");
         setNavigationViewListener();
+
+        iv_qr = findViewById(R.id.iv_qr);
+        iv_qr.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override

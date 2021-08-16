@@ -39,12 +39,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         iv_menu.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.LEFT));
 
         ImageView iv_qr = findViewById(R.id.iv_qr);
-        iv_qr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
-                startActivity(intent);
-            }
+        iv_qr.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
+            startActivity(intent);
         });
 
         TextView toolbar_name = findViewById(R.id.tvToolbar_name);

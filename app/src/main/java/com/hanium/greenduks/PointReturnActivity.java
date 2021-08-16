@@ -18,6 +18,7 @@ public class PointReturnActivity extends AppCompatActivity implements Navigation
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
+    ImageView iv_qr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,11 @@ public class PointReturnActivity extends AppCompatActivity implements Navigation
         initializeLayout(iv_menu, drawerLayout, toolbar_name, "포인트 환급");
         setNavigationViewListener();
 
+        iv_qr = findViewById(R.id.iv_qr);
+        iv_qr.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
