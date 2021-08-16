@@ -18,6 +18,7 @@ public class CenterMainActivity extends AppCompatActivity implements NavigationI
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
+    ImageView iv_qr;
 
     RecyclerView cmRecyclerView;
     CenterMainAdapter cmRecyclerAdapter;
@@ -34,7 +35,7 @@ public class CenterMainActivity extends AppCompatActivity implements NavigationI
         TextView toolbar_name = findViewById(R.id.tvToolbar_name);
         initializeLayout(iv_menu, drawerLayout, toolbar_name, "수거업체용");
 
-        ImageView iv_qr = findViewById(R.id.iv_qr);
+        iv_qr = findViewById(R.id.iv_qr);
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
