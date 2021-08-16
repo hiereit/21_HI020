@@ -11,8 +11,5 @@ public class LicenseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_license);
 
-        Log.d("LicenseActivity", (MainActivity)MainActivity.mContext + "!!!");
-        ((MainActivity)MainActivity.mContext).initializeLayout("LICENSE");
-        ((MainActivity)MainActivity.mContext).setNavigationViewListener();
     }
 }

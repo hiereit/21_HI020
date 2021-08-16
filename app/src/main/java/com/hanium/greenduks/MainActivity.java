@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,14 +22,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    public static Context mContext;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mContext = this;
 
         initializeLayout(""); //toolbar, navigation설정 (param: toolbar 이름)
         setNavigationViewListener();
@@ -40,6 +37,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ImageView iv_menu = findViewById(R.id.iv_menu);
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         iv_menu.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.LEFT));
+
+        ImageView iv_qr = findViewById(R.id.iv_qr);
+        iv_qr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
+                startActivity(intent);
+            }
+        });
 
         TextView toolbar_name = findViewById(R.id.tvToolbar_name);
         toolbar_name.setText(name);
