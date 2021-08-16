@@ -1,14 +1,20 @@
 package com.hanium.greenduks;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class PointReturnActivity extends AppCompatActivity {
+import com.google.android.material.navigation.NavigationView;
+
+public class PointReturnActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
@@ -22,7 +28,22 @@ public class PointReturnActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         iv_menu.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.LEFT));
         TextView toolbar_name = findViewById(R.id.tvToolbar_name);
-        toolbar_name.setText("포인트 환급");
 
+        initializeLayout(iv_menu, drawerLayout, toolbar_name, "포인트 환급");
+        setNavigationViewListener();
+
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Log.d("yyj", "item: " + item);
+        Intent intent = nextIntent(item, this, drawerLayout);
+        startActivity(intent);
+        return true;
+    }
+
+    public void setNavigationViewListener() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 }
