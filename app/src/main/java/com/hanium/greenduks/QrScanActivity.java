@@ -15,8 +15,6 @@ public class QrScanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_qrscan);
-
         qrScan = new IntentIntegrator(this);
         qrScan.setOrientationLocked(false);
         qrScan.setPrompt("QR코드를 스캔하세요");
@@ -27,13 +25,13 @@ public class QrScanActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
-            if(result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
-                // todo
-            } else {
-                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                // todo
+            if(result.getContents() != null) {
+//                Toast.makeText(this, "취소", Toast.LENGTH_LONG).show();
+//            } else {
+//                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();//
             }
+            //add after scanned
+            finish();
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }

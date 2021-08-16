@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,13 +42,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_map);
         ImageView iv_menu = findViewById(R.id.iv_menu);
         drawerLayout = findViewById(R.id.drawer_layout);
         TextView toolbar_name = findViewById(R.id.tvToolbar_name);
-
         initializeLayout(iv_menu, drawerLayout, toolbar_name, "수거함 찾기");
         setNavigationViewListener();
-        setContentView(R.layout.activity_map);
         locMan = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
