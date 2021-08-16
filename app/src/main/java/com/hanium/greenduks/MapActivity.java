@@ -51,6 +51,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         locMan = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        ImageView iv_qr = findViewById(R.id.iv_qr);
+        iv_qr.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
+            startActivity(intent);
+        });
     }
 
      @Override
@@ -124,8 +130,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Intent intent = nextIntent(item, this, drawerLayout);
-        startActivity(intent);
+        startActivity(nextIntent(item, this, drawerLayout));
         return true;
     }
 

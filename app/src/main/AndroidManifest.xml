@@ -24,61 +24,28 @@
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"/>
 
+        <activity android:name=".AccumulatePointActivity"/>
+        <activity android:name=".CenterMainActivity"/>
+        <activity android:name=".CollectActivity"/>
+        <activity android:name=".ConfirmStatusActivity"/>
+        <activity android:name=".LicenseActivity"/>
+        <activity android:name=".LoginActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-        </activity>
-
-        <activity android:name=".PointReturnActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".PointConfirmActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".RankingActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".QnaRegisterActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".QnaListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".QnaBoardActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".LicenseActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MapActivity"/>
+        <activity android:name=".PointConfirmActivity"/>
+        <activity android:name=".PointReturnActivity"/>
+        <activity android:name=".QnaListActivity"/>
+        <activity android:name=".QnaBoardActivity"/>
+        <activity android:name=".QnaRegisterActivity"/>
+        <activity android:name=".QrScanActivity"/>
+        <activity android:name=".RankingActivity"/>
+        <activity android:name=".SeparateActivity"/>
+        <activity android:name=".SignupActivity"/>
+        <activity android:name=".UpdateInformActivity"/>
     </application>
-
 </manifest>

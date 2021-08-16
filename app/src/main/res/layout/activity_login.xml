@@ -8,104 +8,118 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <include
-            layout="@layout/toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <Spinner
-        android:id="@+id/spinnerMember"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerMember">
+                <LinearLayout
+                    android:id="@+id/linearLayout7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
-            android:id="@+id/etLoginId"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/edit_background"
-            android:ems="10"
-            android:hint="아이디"
-            android:inputType="textPersonName|textEmailAddress"
-            android:padding="15dp"
-            android:textSize="15sp" />
+                    <include
+                        layout="@layout/toolbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp" />
+                </LinearLayout>
 
-        <EditText
-            android:id="@+id/etLoginPw"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/edit_background"
-            android:ems="10"
-            android:hint="비밀번호"
-            android:inputType="textPassword"
-            android:padding="15dp"
-            android:textSize="15sp" />
+                <Spinner
+                    android:id="@+id/spinnerMember"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="100dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
-    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="40dp"
+                    android:layout_marginRight="40dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinnerMember">
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="90dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginRight="60dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+                    <EditText
+                        android:id="@+id/etLoginId"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/edit_background"
+                        android:ems="10"
+                        android:hint="아이디"
+                        android:inputType="textPersonName|textEmailAddress"
+                        android:padding="15dp"
+                        android:textSize="15sp" />
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:onClick="onClick"
-            android:text="로그인"
-            app:backgroundTint="#0080ff" />
+                    <EditText
+                        android:id="@+id/etLoginPw"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/edit_background"
+                        android:ems="10"
+                        android:hint="비밀번호"
+                        android:inputType="textPassword"
+                        android:padding="15dp"
+                        android:textSize="15sp" />
 
-        <Button
-            android:id="@+id/btnSignUp"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="10dp"
-            android:onClick="onClick"
-            android:text="회원가입"
-            app:backgroundTint="#0080ff" />
-    </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="90dp"
+                    android:layout_marginEnd="60dp"
+                    android:layout_marginRight="60dp"
+                    android:layout_marginBottom="90dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                    <Button
+                        android:id="@+id/btnLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:onClick="onClick"
+                        android:text="로그인"
+                        app:backgroundTint="#0080ff" />
+
+                    <Button
+                        android:id="@+id/btnSignUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginTop="10dp"
+                        android:onClick="onClick"
+                        android:text="회원가입"
+                        app:backgroundTint="#0080ff" />
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation"
         android:layout_width="wrap_content"
