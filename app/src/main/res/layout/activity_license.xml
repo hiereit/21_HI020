@@ -31,7 +31,21 @@
                     android:id="@+id/tvLicense_progressbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:text="@string/license_progressbar_circle" />
+
+                <TextView
+                    android:id="@+id/tvLicense_barchart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/license_barchart" />
+
+                <TextView
+                    android:id="@+id/tvLicense_qr_scanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/license_qr_scanner" />
             </LinearLayout>
         </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
