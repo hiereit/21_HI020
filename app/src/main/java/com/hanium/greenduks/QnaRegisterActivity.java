@@ -2,17 +2,23 @@ package com.hanium.greenduks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-public class QnaRegisterActivity extends AppCompatActivity {
+import com.google.android.material.navigation.NavigationView;
+
+public class QnaRegisterActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
+
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
@@ -28,7 +34,8 @@ public class QnaRegisterActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         iv_menu.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.LEFT));
         TextView toolbar_name = findViewById(R.id.tvToolbar_name);
-        toolbar_name.setText("문의하기");
+        initializeLayout(iv_menu, drawerLayout, toolbar_name, "문의하기");
+        setNavigationViewListener();
 
         registerBtn = (Button)findViewById(R.id.btnQnaBoard_register);
         registerBtn.setOnClickListener(v -> {
@@ -37,4 +44,16 @@ public class QnaRegisterActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Log.d("yyj", "item: " + item);
+        Intent intent = nextIntent(item, this, drawerLayout);
+        startActivity(intent);
+        return true;
+    }
+
+    public void setNavigationViewListener() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
 }

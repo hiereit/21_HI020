@@ -1,21 +1,27 @@
 package com.hanium.greenduks;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.navigation.NavigationView;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
-public class RankingActivity extends AppCompatActivity {
+public class RankingActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
@@ -33,7 +39,8 @@ public class RankingActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         iv_menu.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.LEFT));
         TextView toolbar_name = findViewById(R.id.tvToolbar_name);
-        toolbar_name.setText("수거왕");
+        initializeLayout(iv_menu, drawerLayout, toolbar_name, "수거왕");
+        setNavigationViewListener();
 
         rRecyclerView = (RecyclerView)findViewById(R.id.rvRanking);
 
@@ -53,4 +60,16 @@ public class RankingActivity extends AppCompatActivity {
        rRecyclerAdapter.setRankList(list);
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Log.d("yyj", "item: " + item);
+        Intent intent = nextIntent(item, this, drawerLayout);
+        startActivity(intent);
+        return true;
+    }
+
+    public void setNavigationViewListener() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
 }
