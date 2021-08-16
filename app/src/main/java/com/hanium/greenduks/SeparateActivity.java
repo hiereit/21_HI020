@@ -46,11 +46,15 @@ public class SeparateActivity extends AppCompatActivity implements NavigationInt
                 startActivity(intent);
             }
         });
+        ImageView iv_qr = findViewById(R.id.iv_qr);
+        iv_qr.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
+            startActivity(intent);
+        });
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Intent intent = nextIntent(item, this, drawerLayout);
-        startActivity(intent);
+        startActivity(nextIntent(item, this, drawerLayout));
         return true;
     }
 
