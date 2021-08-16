@@ -3,19 +3,34 @@ package com.hanium.greenduks;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
-public class UpdateInformActivity extends AppCompatActivity {
+import com.google.android.material.navigation.NavigationView;
+
+public class UpdateInformActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener {
+    DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_updateinform);
+        ImageView iv_menu = findViewById(R.id.iv_menu);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        TextView toolbar_name = findViewById(R.id.tvToolbar_name);
+
+        initializeLayout(iv_menu, drawerLayout, toolbar_name, "마이 페이지");
+        setNavigationViewListener();
+
 
         EditText etName = findViewById(R.id.etName);
         EditText etNickName = findViewById(R.id.etNickName);
@@ -51,5 +66,16 @@ public class UpdateInformActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent = nextIntent(item, this, drawerLayout);
+        startActivity(intent);
+        return true;
+    }
+
+    public void setNavigationViewListener() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 }
