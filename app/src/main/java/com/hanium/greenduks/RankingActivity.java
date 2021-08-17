@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -60,8 +59,25 @@ public class RankingActivity extends AppCompatActivity implements NavigationInte
 
         /* adapt data */
        list = new ArrayList<Ranking>();
-       for(int i = 1; i <= 10; i++){
-           list.add(new Ranking(i, "testId", 10));
+       for(int i = 0; i <= 10; i++){
+           int imgName = -1;
+           list.add(new Ranking(i+1, "testNickname", 10-i));
+
+           switch (list.get(i).getRank()){
+               case 1:
+                   imgName = R.drawable.goldmedal_img;
+                   break;
+               case 2:
+                   imgName = R.drawable.silvermedal_img;
+                   break;
+               case 3:
+                   imgName = R.drawable.bronzemedal_img;
+                   break;
+               default:
+                   imgName = R.drawable.white_img;
+                   break;
+           }
+           list.get(i).setRankImg(imgName);
        }
 
        rRecyclerAdapter.setRankList(list);
@@ -69,7 +85,6 @@ public class RankingActivity extends AppCompatActivity implements NavigationInte
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Log.d("yyj", "item: " + item);
         Intent intent = nextIntent(item, this, drawerLayout);
         startActivity(intent);
         return true;

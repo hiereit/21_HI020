@@ -1,16 +1,32 @@
 package com.hanium.greenduks;
 
 public class Ranking {
+    private int rankImg;
     private int rank;
-    private String memberId;
+    private String nickname;
     private int weight;
 
     public Ranking(){}
 
-    public Ranking(int rank, String memberId, int weight) {
+    public Ranking(int rank, String nickname, int weight) {
         this.rank = rank;
-        this.memberId = memberId;
+        this.nickname = nickname;
         this.weight = weight;
+    }
+
+    public Ranking(int rankImg, int rank, String nickname, int weight) {
+        this.rankImg = rankImg;
+        this.rank = rank;
+        this.nickname = nickname;
+        this.weight = weight;
+    }
+
+    public int getRankImg() {
+        return rankImg;
+    }
+
+    public void setRankImg(int rankImg) {
+        this.rankImg = rankImg;
     }
 
     public int getRank() {
@@ -21,12 +37,12 @@ public class Ranking {
         this.rank = rank;
     }
 
-    public String getMemberId() {
-        return memberId;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public int getWeight() {

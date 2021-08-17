@@ -42,7 +42,6 @@ public class PointReturnActivity extends AppCompatActivity implements Navigation
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Log.d("yyj", "item: " + item);
         Intent intent = nextIntent(item, this, drawerLayout);
         startActivity(intent);
         return true;
