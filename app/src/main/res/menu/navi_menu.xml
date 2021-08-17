@@ -21,9 +21,15 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/navi_menu_qna"
+        android:id="@+id/navi_menu_register_question"
         android:title="문의하기"
-        android:icon="@drawable/ic_baseline_question_answer_24"
+        android:icon="@drawable/registerquestion_img"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/navi_menu_qna"
+        android:title="문의내역"
+        android:icon="@drawable/qna_img"
         app:showAsAction="never"/>
 
     <item

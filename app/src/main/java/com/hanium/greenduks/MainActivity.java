@@ -20,65 +20,40 @@ import com.google.android.material.navigation.NavigationView;
 
 import org.jetbrains.annotations.NotNull;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
+
+    ImageView iv_menu;
+    DrawerLayout drawerLayout;
+    ImageView iv_qr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initializeLayout(""); //toolbar, navigation설정 (param: toolbar 이름)
+        iv_menu = findViewById(R.id.iv_menu);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        iv_menu.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.LEFT));
+        TextView toolbar_name = findViewById(R.id.tvToolbar_name);
+
+        initializeLayout(iv_menu, drawerLayout, toolbar_name, "");
         setNavigationViewListener();
 
-    }
-
-    public void initializeLayout(String name)
-    {
-        ImageView iv_menu = findViewById(R.id.iv_menu);
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        iv_menu.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.LEFT));
-
-        ImageView iv_qr = findViewById(R.id.iv_qr);
+        iv_qr = findViewById(R.id.iv_qr);
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
         });
 
-        TextView toolbar_name = findViewById(R.id.tvToolbar_name);
-        toolbar_name.setText(name);
     }
 
     @Override
-    public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        Intent intent;
-        switch (item.getItemId()) {
-            case R.id.navi_menu_mypage:
-                intent = new Intent(getApplicationContext(), UpdateInformActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.navi_menu_map:
-                intent = new Intent(getApplicationContext(), MapActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.navi_menu_ranking:
-                intent = new Intent(getApplicationContext(), RankingActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.navi_menu_qna:
-                intent = new Intent(getApplicationContext(), QnaListActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.navi_menu_license:
-                intent = new Intent(getApplicationContext(), LicenseActivity.class);
-                startActivity(intent);
-                break;
-        }
-        //close navigation drawer
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        drawerLayout.closeDrawer(GravityCompat.START);
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Intent intent = nextIntent(item, this, drawerLayout);
+        startActivity(intent);
         return true;
     }
+
     public void setNavigationViewListener() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(this);
