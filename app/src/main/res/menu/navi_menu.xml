@@ -15,6 +15,12 @@
         app:showAsAction="never"/>
 
     <item
+        android:id="@+id/navi_menu_return"
+        android:title="환급하기"
+        android:icon="@drawable/returnmoney_img"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/navi_menu_ranking"
         android:title="수거왕"
         android:icon="@drawable/crown_img"

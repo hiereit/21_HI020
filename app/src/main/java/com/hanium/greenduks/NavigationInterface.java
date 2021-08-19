@@ -34,6 +34,9 @@ public interface NavigationInterface {
             case R.id.navi_menu_map:
                 intent = new Intent(context, MapActivity.class);
                 break;
+            case R.id.navi_menu_return:
+                intent = new Intent(context, PointReturnActivity.class);
+                break;
             case R.id.navi_menu_ranking:
                 intent = new Intent(context, RankingActivity.class);
                 break;
