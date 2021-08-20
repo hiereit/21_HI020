@@ -26,6 +26,7 @@ public class AccumulatePointActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AccumulatePointActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -33,6 +34,7 @@ public class AccumulatePointActivity extends AppCompatActivity {
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 }

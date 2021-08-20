@@ -36,6 +36,7 @@ public class SeparateActivity extends AppCompatActivity implements NavigationInt
             public void onClick(View view) {
                 Intent intent = new Intent(SeparateActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -44,17 +45,20 @@ public class SeparateActivity extends AppCompatActivity implements NavigationInt
             public void onClick(View view) {
                 Intent intent = new Intent(SeparateActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         ImageView iv_qr = findViewById(R.id.iv_qr);
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
+            finish();
         });
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         startActivity(nextIntent(item, this, drawerLayout));
+        finish();
         return true;
     }
 
