@@ -48,6 +48,7 @@ public class QnaRegisterActivity extends AppCompatActivity implements Navigation
         registerBtn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QnaListActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 
@@ -56,6 +57,7 @@ public class QnaRegisterActivity extends AppCompatActivity implements Navigation
         Log.d("yyj", "item: " + item);
         Intent intent = nextIntent(item, this, drawerLayout);
         startActivity(intent);
+        finish();
         return true;
     }
 

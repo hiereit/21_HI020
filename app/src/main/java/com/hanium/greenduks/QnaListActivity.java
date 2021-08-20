@@ -45,6 +45,7 @@ public class QnaListActivity extends AppCompatActivity implements NavigationInte
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
+            finish();
         });
 
         qRecyclerView = (RecyclerView)findViewById(R.id.rvQna);
@@ -73,6 +74,7 @@ public class QnaListActivity extends AppCompatActivity implements NavigationInte
         Log.d("yyj", "item: " + item);
         Intent intent = nextIntent(item, this, drawerLayout);
         startActivity(intent);
+        finish();
         return true;
     }
 
