@@ -46,6 +46,7 @@ public class UpdateInformActivity extends AppCompatActivity implements Navigatio
             public void onClick(View view) {
                 Intent intent = new Intent(UpdateInformActivity.this, MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -60,6 +61,7 @@ public class UpdateInformActivity extends AppCompatActivity implements Navigatio
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         Intent intent = new Intent(UpdateInformActivity.this, LoginActivity.class);
                                         startActivity(intent);
+                                        finish();
                                     }
                                 })
                         .setNegativeButton("아니오", null);
@@ -70,11 +72,13 @@ public class UpdateInformActivity extends AppCompatActivity implements Navigatio
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
+            finish();
         });
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         startActivity(nextIntent(item, this, drawerLayout));
+        finish();
         return true;
     }
 

@@ -56,6 +56,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 

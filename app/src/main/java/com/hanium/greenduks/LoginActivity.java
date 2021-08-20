@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationInterf
                 }
                 Intent intent = new Intent(LoginActivity.this, nextActivity);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -82,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationInterf
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -89,12 +91,14 @@ public class LoginActivity extends AppCompatActivity implements NavigationInterf
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         startActivity(nextIntent(item, this, drawerLayout));
+        finish();
         return true;
     }
 
