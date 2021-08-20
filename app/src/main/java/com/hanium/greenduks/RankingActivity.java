@@ -46,6 +46,7 @@ public class RankingActivity extends AppCompatActivity implements NavigationInte
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
+            finish();
         });
 
         rRecyclerView = (RecyclerView)findViewById(R.id.rvRanking);
@@ -87,6 +88,7 @@ public class RankingActivity extends AppCompatActivity implements NavigationInte
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent = nextIntent(item, this, drawerLayout);
         startActivity(intent);
+        finish();
         return true;
     }
 

@@ -52,6 +52,7 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
+            finish();
         });
 
         circleProgress();
@@ -101,6 +102,7 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent = nextIntent(item, this, drawerLayout);
         startActivity(intent);
+        finish();
         return true;
     }
 

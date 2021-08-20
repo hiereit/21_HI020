@@ -38,6 +38,7 @@ public class QnaBoardActivity extends AppCompatActivity implements NavigationInt
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
+            finish();
         });
     }
 
@@ -45,6 +46,7 @@ public class QnaBoardActivity extends AppCompatActivity implements NavigationInt
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Intent intent = nextIntent(item, this, drawerLayout);
         startActivity(intent);
+        finish();
         return true;
     }
 
