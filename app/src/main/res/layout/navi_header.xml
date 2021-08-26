@@ -46,4 +46,11 @@
             android:text="가까운 수거함 위치" />
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:paddingRight="20dp"
+        app:srcCompat="@drawable/logout_img" />
+
 </LinearLayout>
