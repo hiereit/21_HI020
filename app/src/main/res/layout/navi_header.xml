@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navi_header"
     android:layout_width="match_parent"
     android:layout_height="150dp"
     android:background="#A9D0F5"
@@ -47,7 +48,7 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivNavi_logout"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:paddingRight="20dp"

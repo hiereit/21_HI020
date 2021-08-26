@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.amazonaws.mobile.client.AWSMobileClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -56,6 +58,21 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
+            finish();
+        });
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        // xml 파일에서 넣어놨던 header 선언
+        View header = navigationView.getHeaderView(0);
+        // header에 있는 리소스 가져오기
+        ImageView logoutBtn = (ImageView) header.findViewById(R.id.ivNavi_logout);
+
+        logoutBtn.setOnClickListener(v -> {
+            AWSMobileClient.getInstance().signOut();
+            Intent i = new Intent(MapActivity.this, AuthActivity.class);
+            startActivity(i);
             finish();
         });
     }

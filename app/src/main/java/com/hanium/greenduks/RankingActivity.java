@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amazonaws.mobile.client.AWSMobileClient;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -46,6 +48,21 @@ public class RankingActivity extends AppCompatActivity implements NavigationInte
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
             startActivity(intent);
+            finish();
+        });
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        // xml 파일에서 넣어놨던 header 선언
+        View header = navigationView.getHeaderView(0);
+        // header에 있는 리소스 가져오기
+        ImageView logoutBtn = (ImageView) header.findViewById(R.id.ivNavi_logout);
+
+        logoutBtn.setOnClickListener(v -> {
+            AWSMobileClient.getInstance().signOut();
+            Intent i = new Intent(RankingActivity.this, AuthActivity.class);
+            startActivity(i);
             finish();
         });
 
