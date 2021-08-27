@@ -1,72 +1,126 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateTask {
-  onCreateTask {
+subscription OnCreateQuestion {
+  onCreateQuestion {
     id
     title
-    description
-    status
-    _version
-    _deleted
-    _lastChangedAt
+    content
+    date
+    user_id
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateTask {
-  onUpdateTask {
+subscription OnUpdateQuestion {
+  onUpdateQuestion {
     id
     title
-    description
-    status
-    _version
-    _deleted
-    _lastChangedAt
+    content
+    date
+    user_id
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteTask {
-  onDeleteTask {
+subscription OnDeleteQuestion {
+  onDeleteQuestion {
     id
     title
-    description
-    status
-    _version
-    _deleted
-    _lastChangedAt
+    content
+    date
+    user_id
     createdAt
     updatedAt
   }
 }
-subscription OnCreateNote {
-  onCreateNote {
+subscription OnCreateAnswer {
+  onCreateAnswer {
     id
+    question_id
+    date
     content
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
 }
-subscription OnUpdateNote {
-  onUpdateNote {
+subscription OnUpdateAnswer {
+  onUpdateAnswer {
     id
+    question_id
+    date
     content
-    _version
-    _deleted
-    _lastChangedAt
     createdAt
     updatedAt
   }
 }
-subscription OnDeleteNote {
-  onDeleteNote {
+subscription OnDeleteAnswer {
+  onDeleteAnswer {
     id
+    question_id
+    date
     content
-    _version
-    _deleted
-    _lastChangedAt
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreatePoint {
+  onCreatePoint {
+    id
+    user_id
+    date
+    value
+    weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdatePoint {
+  onUpdatePoint {
+    id
+    user_id
+    date
+    value
+    weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeletePoint {
+  onDeletePoint {
+    id
+    user_id
+    date
+    value
+    weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateBox {
+  onCreateBox {
+    id
+    address
+    center_id
+    weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateBox {
+  onUpdateBox {
+    id
+    address
+    center_id
+    weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteBox {
+  onDeleteBox {
+    id
+    address
+    center_id
+    weight
     createdAt
     updatedAt
   }
