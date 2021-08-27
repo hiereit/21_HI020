@@ -6,7 +6,10 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +24,8 @@ public class PointReturnActivity extends AppCompatActivity implements Navigation
     ImageView iv_menu;
     DrawerLayout drawerLayout;
     ImageView iv_qr;
+    String[] bank_items = {"국민은행", "농협은행", "기업은행", "신한은행", "우리은행", "하나은행", "카카오뱅크"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,25 @@ public class PointReturnActivity extends AppCompatActivity implements Navigation
             Intent i = new Intent(PointReturnActivity.this, AuthActivity.class);
             startActivity(i);
             finish();
+        });
+
+        Spinner spinner = findViewById(R.id.spinner_bank);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+               this, android.R.layout.simple_spinner_item, bank_items);
+        adapter.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
         });
     }
 
