@@ -1,0 +1,28 @@
+type Question @model {
+  id: ID!
+  title: String!
+  content: String!
+  date: String!
+  user_id: String!
+}
+type Answer @model{
+  id: ID!
+  question_id: String!
+  date: String!
+  content: String!
+}
+
+type Point @model{
+  id: ID!
+  user_id: String!
+  date: String!
+  value: Int!
+  weight: Float
+}
+type Box @model{
+  id: ID!
+  address: String!
+  center_id: String!
+  weight: Float
+}
+
