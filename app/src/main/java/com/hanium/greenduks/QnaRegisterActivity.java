@@ -94,13 +94,19 @@ public class QnaRegisterActivity extends AppCompatActivity implements Navigation
 
             String userId = AWSMobileClient.getInstance().getUsername();
             Question item = Question.builder()
-                    .questionId("qTest2")
-                    .title("testTitle2")
-                    .conten("testContent2")
-                    .date("2021-09-01")
+                    .title("testTitle3")
+                    .content("testContent3")
+                    .date(String.valueOf(System.currentTimeMillis()))
                     .userId(userId)
-                    .id("qidTest2")
+                    .id("qtest3")
                     .build();
+
+//                    .id("qtest3")
+//                    .title("testTitle2")
+//                    .content("testContent2")
+//                    .date("2021-09-01")
+//                    .userId(userId)
+//                    .build();
 
             Amplify.API.mutate(ModelMutation.create(item),
                     response -> Log.d(TAG, "Todo with id: " + response.getData().getId()),
