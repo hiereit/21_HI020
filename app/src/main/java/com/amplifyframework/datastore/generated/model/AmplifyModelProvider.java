@@ -7,13 +7,13 @@ import com.amplifyframework.core.model.ModelProvider;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-/**
+/** 
  *  Contains the set of model classes that implement {@link Model}
  * interface.
  */
 
 public final class AmplifyModelProvider implements ModelProvider {
-  private static final String AMPLIFY_MODEL_VERSION = "c187932c69c5aba0e6c9ddbee6fc6f12";
+  private static final String AMPLIFY_MODEL_VERSION = "34b1fedb05df866ed752d89734ea0872";
   private static AmplifyModelProvider amplifyGeneratedModelInstance;
   private AmplifyModelProvider() {
     
@@ -34,7 +34,7 @@ public final class AmplifyModelProvider implements ModelProvider {
   @Override
    public Set<Class<? extends Model>> models() {
     final Set<Class<? extends Model>> modifiableSet = new HashSet<>(
-          Arrays.<Class<? extends Model>>asList(Task.class, Note.class)
+          Arrays.<Class<? extends Model>>asList(Box.class, Weight.class, Point.class, Answer.class, Question.class)
         );
     
         return Immutable.of(modifiableSet);
