@@ -101,13 +101,6 @@ public class QnaRegisterActivity extends AppCompatActivity implements Navigation
                     .id("qtest3")
                     .build();
 
-//                    .id("qtest3")
-//                    .title("testTitle2")
-//                    .content("testContent2")
-//                    .date("2021-09-01")
-//                    .userId(userId)
-//                    .build();
-
             Amplify.API.mutate(ModelMutation.create(item),
                     response -> Log.d(TAG, "Todo with id: " + response.getData().getId()),
                     error -> Log.d(TAG, "Create failed", error)
