@@ -1,100 +1,4 @@
 # this is an auto generated file. This will be overwritten
-subscription OnCreateQuestion {
-  onCreateQuestion {
-    id
-    title
-    content
-    date
-    user_id
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateQuestion {
-  onUpdateQuestion {
-    id
-    title
-    content
-    date
-    user_id
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteQuestion {
-  onDeleteQuestion {
-    id
-    title
-    content
-    date
-    user_id
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreateAnswer {
-  onCreateAnswer {
-    id
-    question_id
-    date
-    content
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdateAnswer {
-  onUpdateAnswer {
-    id
-    question_id
-    date
-    content
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeleteAnswer {
-  onDeleteAnswer {
-    id
-    question_id
-    date
-    content
-    createdAt
-    updatedAt
-  }
-}
-subscription OnCreatePoint {
-  onCreatePoint {
-    id
-    user_id
-    date
-    value
-    weight
-    createdAt
-    updatedAt
-  }
-}
-subscription OnUpdatePoint {
-  onUpdatePoint {
-    id
-    user_id
-    date
-    value
-    weight
-    createdAt
-    updatedAt
-  }
-}
-subscription OnDeletePoint {
-  onDeletePoint {
-    id
-    user_id
-    date
-    value
-    weight
-    createdAt
-    updatedAt
-  }
-}
 subscription OnCreateBox {
   onCreateBox {
     id
@@ -121,6 +25,126 @@ subscription OnDeleteBox {
     address
     center_id
     weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateWeight {
+  onCreateWeight {
+    id
+    weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateWeight {
+  onUpdateWeight {
+    id
+    weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteWeight {
+  onDeleteWeight {
+    id
+    weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreatePoint {
+  onCreatePoint {
+    id
+    userId
+    date
+    value
+    weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdatePoint {
+  onUpdatePoint {
+    id
+    userId
+    date
+    value
+    weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeletePoint {
+  onDeletePoint {
+    id
+    userId
+    date
+    value
+    weight
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateAnswer {
+  onCreateAnswer {
+    id
+    questionId
+    date
+    content
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateAnswer {
+  onUpdateAnswer {
+    id
+    questionId
+    date
+    content
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteAnswer {
+  onDeleteAnswer {
+    id
+    questionId
+    date
+    content
+    createdAt
+    updatedAt
+  }
+}
+subscription OnCreateQuestion {
+  onCreateQuestion {
+    id
+    title
+    content
+    date
+    userId
+    createdAt
+    updatedAt
+  }
+}
+subscription OnUpdateQuestion {
+  onUpdateQuestion {
+    id
+    title
+    content
+    date
+    userId
+    createdAt
+    updatedAt
+  }
+}
+subscription OnDeleteQuestion {
+  onDeleteQuestion {
+    id
+    title
+    content
+    date
+    userId
     createdAt
     updatedAt
   }

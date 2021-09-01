@@ -1,5 +1,6 @@
 package com.hanium.greenduks;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Question;
 import com.google.android.material.navigation.NavigationView;
 
 public class QnaBoardActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
@@ -22,6 +29,8 @@ public class QnaBoardActivity extends AppCompatActivity implements NavigationInt
     ImageView iv_menu;
     DrawerLayout drawerLayout;
     ImageView iv_qr;
+
+    Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +66,32 @@ public class QnaBoardActivity extends AppCompatActivity implements NavigationInt
             startActivity(i);
             finish();
         });
+
+        //
+        context = this.getApplicationContext();
+
+        try {
+            Amplify.addPlugin(new AWSCognitoAuthPlugin());
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.configure(context);
+
+            Log.d("aty", "Initialized Amplify");
+        } catch (AmplifyException e) {
+            Log.d("aty", "Could not initialize Amplify", e);
+        }
+        getQuestion("qidTest1");
+        //
+
+
+    }
+
+    //
+    private void getQuestion(String id) {
+        Amplify.API.query(
+                ModelQuery.get(Question.class, id),
+                response -> Log.i("aty", ((Question) response.getData()).getConten()),
+                error -> Log.e("aty", error.toString(), error)
+        );
     }
 
     @Override

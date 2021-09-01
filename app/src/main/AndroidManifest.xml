@@ -41,7 +41,12 @@
         <activity android:name=".PointConfirmActivity"/>
         <activity android:name=".PointReturnActivity"/>
         <activity android:name=".QnaListActivity"/>
-        <activity android:name=".QnaBoardActivity"/>
+        <activity android:name=".QnaBoardActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".QnaRegisterActivity"/>
         <activity android:name=".QrScanActivity"/>
         <activity android:name=".RankingActivity"/>
@@ -55,5 +60,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 </manifest>
