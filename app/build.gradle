@@ -89,6 +89,4 @@ dependencies {
     implementation 'com.amazonaws:aws-android-sdk-ddb-mapper:2.7.+'
 
     implementation 'com.amplifyframework:aws-auth-cognito:1.4.0'
-
-
 }
