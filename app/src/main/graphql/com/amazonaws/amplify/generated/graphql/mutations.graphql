@@ -1,127 +1,4 @@
 # this is an auto generated file. This will be overwritten
-mutation CreateQuestion(
-  $input: CreateQuestionInput!
-  $condition: ModelQuestionConditionInput
-) {
-  createQuestion(input: $input, condition: $condition) {
-    id
-    title
-    content
-    date
-    user_id
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateQuestion(
-  $input: UpdateQuestionInput!
-  $condition: ModelQuestionConditionInput
-) {
-  updateQuestion(input: $input, condition: $condition) {
-    id
-    title
-    content
-    date
-    user_id
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteQuestion(
-  $input: DeleteQuestionInput!
-  $condition: ModelQuestionConditionInput
-) {
-  deleteQuestion(input: $input, condition: $condition) {
-    id
-    title
-    content
-    date
-    user_id
-    createdAt
-    updatedAt
-  }
-}
-mutation CreateAnswer(
-  $input: CreateAnswerInput!
-  $condition: ModelAnswerConditionInput
-) {
-  createAnswer(input: $input, condition: $condition) {
-    id
-    question_id
-    date
-    content
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdateAnswer(
-  $input: UpdateAnswerInput!
-  $condition: ModelAnswerConditionInput
-) {
-  updateAnswer(input: $input, condition: $condition) {
-    id
-    question_id
-    date
-    content
-    createdAt
-    updatedAt
-  }
-}
-mutation DeleteAnswer(
-  $input: DeleteAnswerInput!
-  $condition: ModelAnswerConditionInput
-) {
-  deleteAnswer(input: $input, condition: $condition) {
-    id
-    question_id
-    date
-    content
-    createdAt
-    updatedAt
-  }
-}
-mutation CreatePoint(
-  $input: CreatePointInput!
-  $condition: ModelPointConditionInput
-) {
-  createPoint(input: $input, condition: $condition) {
-    id
-    user_id
-    date
-    value
-    weight
-    createdAt
-    updatedAt
-  }
-}
-mutation UpdatePoint(
-  $input: UpdatePointInput!
-  $condition: ModelPointConditionInput
-) {
-  updatePoint(input: $input, condition: $condition) {
-    id
-    user_id
-    date
-    value
-    weight
-    createdAt
-    updatedAt
-  }
-}
-mutation DeletePoint(
-  $input: DeletePointInput!
-  $condition: ModelPointConditionInput
-) {
-  deletePoint(input: $input, condition: $condition) {
-    id
-    user_id
-    date
-    value
-    weight
-    createdAt
-    updatedAt
-  }
-}
 mutation CreateBox(
   $input: CreateBoxInput!
   $condition: ModelBoxConditionInput
@@ -157,6 +34,162 @@ mutation DeleteBox(
     address
     center_id
     weight
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateWeight(
+  $input: CreateWeightInput!
+  $condition: ModelWeightConditionInput
+) {
+  createWeight(input: $input, condition: $condition) {
+    id
+    weight
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateWeight(
+  $input: UpdateWeightInput!
+  $condition: ModelWeightConditionInput
+) {
+  updateWeight(input: $input, condition: $condition) {
+    id
+    weight
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteWeight(
+  $input: DeleteWeightInput!
+  $condition: ModelWeightConditionInput
+) {
+  deleteWeight(input: $input, condition: $condition) {
+    id
+    weight
+    createdAt
+    updatedAt
+  }
+}
+mutation CreatePoint(
+  $input: CreatePointInput!
+  $condition: ModelPointConditionInput
+) {
+  createPoint(input: $input, condition: $condition) {
+    id
+    userId
+    date
+    value
+    weight
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdatePoint(
+  $input: UpdatePointInput!
+  $condition: ModelPointConditionInput
+) {
+  updatePoint(input: $input, condition: $condition) {
+    id
+    userId
+    date
+    value
+    weight
+    createdAt
+    updatedAt
+  }
+}
+mutation DeletePoint(
+  $input: DeletePointInput!
+  $condition: ModelPointConditionInput
+) {
+  deletePoint(input: $input, condition: $condition) {
+    id
+    userId
+    date
+    value
+    weight
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateAnswer(
+  $input: CreateAnswerInput!
+  $condition: ModelAnswerConditionInput
+) {
+  createAnswer(input: $input, condition: $condition) {
+    id
+    questionId
+    date
+    content
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateAnswer(
+  $input: UpdateAnswerInput!
+  $condition: ModelAnswerConditionInput
+) {
+  updateAnswer(input: $input, condition: $condition) {
+    id
+    questionId
+    date
+    content
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteAnswer(
+  $input: DeleteAnswerInput!
+  $condition: ModelAnswerConditionInput
+) {
+  deleteAnswer(input: $input, condition: $condition) {
+    id
+    questionId
+    date
+    content
+    createdAt
+    updatedAt
+  }
+}
+mutation CreateQuestion(
+  $input: CreateQuestionInput!
+  $condition: ModelQuestionConditionInput
+) {
+  createQuestion(input: $input, condition: $condition) {
+    id
+    title
+    content
+    date
+    userId
+    createdAt
+    updatedAt
+  }
+}
+mutation UpdateQuestion(
+  $input: UpdateQuestionInput!
+  $condition: ModelQuestionConditionInput
+) {
+  updateQuestion(input: $input, condition: $condition) {
+    id
+    title
+    content
+    date
+    userId
+    createdAt
+    updatedAt
+  }
+}
+mutation DeleteQuestion(
+  $input: DeleteQuestionInput!
+  $condition: ModelQuestionConditionInput
+) {
+  deleteQuestion(input: $input, condition: $condition) {
+    id
+    title
+    content
+    date
+    userId
     createdAt
     updatedAt
   }
