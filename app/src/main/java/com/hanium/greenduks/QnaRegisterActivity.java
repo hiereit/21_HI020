@@ -31,9 +31,12 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Question;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.UUID;
 
-public class QnaRegisterActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
 
+public class QnaRegisterActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface{
+
+    private static final String TAG = "QnaRegisterActivity";
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
@@ -41,10 +44,9 @@ public class QnaRegisterActivity extends AppCompatActivity implements Navigation
 
     Button registerBtn;
 
-    //
-    private static final String TAG = "yyj";
     Context context;
-
+    TextView title;
+    TextView questionContent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,26 +81,22 @@ public class QnaRegisterActivity extends AppCompatActivity implements Navigation
             finish();
         });
 
-        //
-            context = this.getApplicationContext();
+        context = this.getApplicationContext();
+        amplifyInit(context);
+        String userId = AWSMobileClient.getInstance().getUsername();
 
-            try {
-                Amplify.addPlugin(new AWSCognitoAuthPlugin());
-                Amplify.addPlugin(new AWSApiPlugin());
-                Amplify.configure(context);
+        title = findViewById(R.id.etQnaRegister_title);
+        questionContent = findViewById(R.id.etQnaRegister_question);
 
-                Log.d(TAG, "Initialized Amplify");
-            } catch (AmplifyException e) {
-                Log.d(TAG, "Could not initialize Amplify", e);
-            }
-
-            String userId = AWSMobileClient.getInstance().getUsername();
+        registerBtn = (Button)findViewById(R.id.btnQnaBoard_register);
+        registerBtn.setOnClickListener(v -> {
+            String uniqueID = UUID.randomUUID().toString();
             Question item = Question.builder()
-                    .title("testTitle3")
-                    .content("testContent3")
+                    .title(title.getText().toString())
+                    .content(questionContent.getText().toString())
                     .date(String.valueOf(System.currentTimeMillis()))
                     .userId(userId)
-                    .id("qtest3")
+                    .id(uniqueID)
                     .build();
 
             Amplify.API.mutate(ModelMutation.create(item),
@@ -106,8 +104,6 @@ public class QnaRegisterActivity extends AppCompatActivity implements Navigation
                     error -> Log.d(TAG, "Create failed", error)
             );
 
-        registerBtn = (Button)findViewById(R.id.btnQnaBoard_register);
-        registerBtn.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QnaListActivity.class);
             startActivity(intent);
             finish();

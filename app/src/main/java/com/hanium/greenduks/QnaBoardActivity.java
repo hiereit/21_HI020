@@ -24,7 +24,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Question;
 import com.google.android.material.navigation.NavigationView;
 
-public class QnaBoardActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
+public class QnaBoardActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface{
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
@@ -67,20 +67,11 @@ public class QnaBoardActivity extends AppCompatActivity implements NavigationInt
             finish();
         });
 
-        //
         context = this.getApplicationContext();
+        amplifyInit(context);
+        String userId = AWSMobileClient.getInstance().getUsername();
 
-        try {
-            Amplify.addPlugin(new AWSCognitoAuthPlugin());
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.configure(context);
-
-            Log.d("aty", "Initialized Amplify");
-        } catch (AmplifyException e) {
-            Log.d("aty", "Could not initialize Amplify", e);
-        }
         getQuestion("qidTest1");
-        //
 
 
     }
@@ -89,7 +80,7 @@ public class QnaBoardActivity extends AppCompatActivity implements NavigationInt
     private void getQuestion(String id) {
         Amplify.API.query(
                 ModelQuery.get(Question.class, id),
-                response -> Log.i("aty", ((Question) response.getData()).getConten()),
+                response -> Log.i("aty", ((Question) response.getData()).getContent()),
                 error -> Log.e("aty", error.toString(), error)
         );
     }
