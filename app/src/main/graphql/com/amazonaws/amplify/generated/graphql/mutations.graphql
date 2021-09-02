@@ -6,7 +6,7 @@ mutation CreateBox(
   createBox(input: $input, condition: $condition) {
     id
     address
-    center_id
+    centerId
     weight
     createdAt
     updatedAt
@@ -19,7 +19,7 @@ mutation UpdateBox(
   updateBox(input: $input, condition: $condition) {
     id
     address
-    center_id
+    centerId
     weight
     createdAt
     updatedAt
@@ -32,7 +32,7 @@ mutation DeleteBox(
   deleteBox(input: $input, condition: $condition) {
     id
     address
-    center_id
+    centerId
     weight
     createdAt
     updatedAt

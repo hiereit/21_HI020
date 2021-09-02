@@ -3,7 +3,7 @@ query GetBox($id: ID!) {
   getBox(id: $id) {
     id
     address
-    center_id
+    centerId
     weight
     createdAt
     updatedAt
@@ -14,7 +14,7 @@ query ListBoxes($filter: ModelBoxFilterInput, $limit: Int, $nextToken: String) {
     items {
       id
       address
-      center_id
+      centerId
       weight
       createdAt
       updatedAt

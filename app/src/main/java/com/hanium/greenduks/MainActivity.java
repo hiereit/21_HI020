@@ -2,32 +2,46 @@ package com.hanium.greenduks;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Point;
 import com.google.android.material.navigation.NavigationView;
+import com.vaibhavlakhera.circularprogressview.CircularProgressView;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface{
+
+    private static final String TAG = "MainActivity";
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
     ImageView iv_qr;
+
+    Handler weightHandler;
+    Handler valueHandler;
+
+    Context context;
+    String userId = "";
+    CircularProgressView circularProgressView;
+    int sumValue = 0;
+    Double sumWeight = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +77,97 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
             finish();
         });
 
+        context = this.getApplicationContext();
+        amplifyInit(context);
+        userId = AWSMobileClient.getInstance().getUsername();
+
+        TextView tvDate = findViewById(R.id.tvMain_date);
+        tvDate.setText(getTodayDate());
+
+        TextView tvWeight = findViewById(R.id.tvMain_weight);
+        weightHandler = new Handler(Looper.getMainLooper(), msg -> {
+            tvWeight.setText(msg.obj.toString());
+            return false;
+        });
+        getMyWeight(userId);
+
+        circularProgressView=findViewById(R.id.cpb_circlebar);
+        valueHandler = new Handler(Looper.getMainLooper(), msg -> {
+            circularProgressView.setProgress((Integer) msg.obj, true);  //현재 value
+            return false;
+        });
+        circleProgress(userId);
+    }
+
+    public String getTodayDate(){
+        Calendar cal = Calendar.getInstance();
+
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int date = cal.get(Calendar.DATE);
+        int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+
+        String korDayOfWeek = "";
+        switch(dayOfWeek){
+            case 1:
+                korDayOfWeek = "일";
+                break;
+            case 2:
+                korDayOfWeek = "월";
+                break;
+            case 3:
+                korDayOfWeek = "화";
+                break;
+            case 4:
+                korDayOfWeek = "수";
+                break;
+            case 5:
+                korDayOfWeek = "목";
+                break;
+            case 6:
+                korDayOfWeek = "금";
+                break;
+            case 7:
+                korDayOfWeek = "토";
+                break;
+        }
+
+        String today = year + "." + month + "." + date + "." + " (" + korDayOfWeek + ")";
+        return today;
+    }
+
+    public void getMyWeight(String userId){
+
+        Amplify.API.query(
+                ModelQuery.list(Point.class, Point.USER_ID.contains(userId)),
+                response -> {
+                    Message turnAlertMsg = new Message();
+                    for (Point point : response.getData()) {
+                        Log.i(TAG, point.getWeight().toString());
+                        sumWeight += point.getWeight();
+                    }
+                    turnAlertMsg.obj = sumWeight;
+                    weightHandler.sendMessage(turnAlertMsg);
+                },
+                error -> Log.e(TAG, "Query failure", error)
+        );
+    }
+
+    private void circleProgress(String userId){
+
+        Amplify.API.query(
+                ModelQuery.list(Point.class, Point.USER_ID.contains(userId)),
+                response -> {
+                    Message turnAlertMsg = new Message();
+                    for (Point point : response.getData()) {
+                        Log.i(TAG, point.getValue().toString());
+                        sumValue += point.getValue();
+                    }
+                    turnAlertMsg.obj = sumValue;
+                    valueHandler.sendMessage(turnAlertMsg);
+                },
+                error -> Log.e(TAG, "Query failure", error)
+        );
     }
 
     @Override
