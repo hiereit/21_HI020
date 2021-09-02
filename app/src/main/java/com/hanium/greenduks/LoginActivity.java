@@ -14,19 +14,25 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.amplifyframework.auth.AuthUserAttributeKey;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
+import com.amplifyframework.core.Amplify;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class LoginActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener {
+public class LoginActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface {
     private String[] members = new String[]{"일반 회원", "수거 업체", "관리자"};
     private int member;
     DrawerLayout drawerLayout;
+    EditText etLoginId;
+    EditText etLoginPw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +46,10 @@ public class LoginActivity extends AppCompatActivity implements NavigationInterf
         initializeLayout(iv_menu, drawerLayout, toolbar_name, "로그인");
         setNavigationViewListener();
 
-        EditText etLoginId = findViewById(R.id.etLoginId);
-        EditText etLoginPw = findViewById(R.id.etLoginPw);
+        amplifyInit(this.getApplicationContext());
+
+        etLoginId = findViewById(R.id.etLoginId);
+        etLoginPw = findViewById(R.id.etLoginPw);
         Spinner spinner = findViewById(R.id.spinnerMember);
         Button btnLogin = findViewById(R.id.btnLogin);
         Button btnSignUp = findViewById(R.id.btnSignUp);
@@ -62,19 +70,33 @@ public class LoginActivity extends AppCompatActivity implements NavigationInterf
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Class nextActivity = null;
-                if (member == 0) {
-                    nextActivity = MainActivity.class;
-                }
-                else if (member == 1) {
-                    nextActivity = CenterMainActivity.class;
-                }
-                else {
-                    nextActivity = QnaListActivity.class;
-                }
-                Intent intent = new Intent(LoginActivity.this, nextActivity);
-                startActivity(intent);
-                finish();
+                Amplify.Auth.signIn(
+                        etLoginId.getText().toString(),
+                        etLoginPw.getText().toString(),
+                        result -> {
+                            if (result.isSignInComplete()){
+                                Class nextActivity = null;
+                                if (member == 0) {
+                                    nextActivity = MainActivity.class;
+                                }
+                                else if (member == 1) {
+                                    nextActivity = CenterMainActivity.class;
+                                }
+                                else {
+                                    nextActivity = QnaListActivity.class;
+                                }
+                                Intent intent = new Intent(LoginActivity.this, nextActivity);
+                                startActivity(intent);
+                                finish();
+                            }
+                            else {
+                                Toast.makeText(LoginActivity.this, "아이디 또는 비밀번호를 확인하세요.", Toast.LENGTH_SHORT).show();
+                            }
+                        },
+                        error -> {
+                            Toast.makeText(LoginActivity.this, "아이디 또는 비밀번호를 확인하세요.", Toast.LENGTH_SHORT).show();
+                        }
+                );
             }
         });
 
