@@ -419,7 +419,7 @@
                         "deprecationReason": null
                     },
                     {
-                        "name": "center_id",
+                        "name": "centerId",
                         "description": null,
                         "args": [],
                         "type": {
@@ -443,7 +443,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "SCALAR",
-                                "name": "Float",
+                                "name": "Double",
                                 "ofType": null
                             }
                         },
@@ -500,8 +500,8 @@
             },
             {
                 "kind": "SCALAR",
-                "name": "Float",
-                "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
+                "name": "Double",
+                "description": null,
                 "fields": null,
                 "inputFields": null,
                 "interfaces": null,
@@ -545,7 +545,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "center_id",
+                        "name": "centerId",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -1179,6 +1179,16 @@
                 "possibleTypes": null
             },
             {
+                "kind": "SCALAR",
+                "name": "Float",
+                "description": "The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).",
+                "fields": null,
+                "inputFields": null,
+                "interfaces": null,
+                "enumValues": null,
+                "possibleTypes": null
+            },
+            {
                 "kind": "OBJECT",
                 "name": "ModelBoxConnection",
                 "description": null,
@@ -1247,7 +1257,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "SCALAR",
-                                "name": "Float",
+                                "name": "Double",
                                 "ofType": null
                             }
                         },
@@ -1475,7 +1485,7 @@
                         "args": [],
                         "type": {
                             "kind": "SCALAR",
-                            "name": "Float",
+                            "name": "Double",
                             "ofType": null
                         },
                         "isDeprecated": false,
@@ -2855,7 +2865,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "center_id",
+                        "name": "centerId",
                         "description": null,
                         "type": {
                             "kind": "NON_NULL",
@@ -2876,7 +2886,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "SCALAR",
-                                "name": "Float",
+                                "name": "Double",
                                 "ofType": null
                             }
                         },
@@ -2904,7 +2914,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "center_id",
+                        "name": "centerId",
                         "description": null,
                         "type": {
                             "kind": "INPUT_OBJECT",
@@ -2997,7 +3007,7 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "center_id",
+                        "name": "centerId",
                         "description": null,
                         "type": {
                             "kind": "SCALAR",
@@ -3011,7 +3021,7 @@
                         "description": null,
                         "type": {
                             "kind": "SCALAR",
-                            "name": "Float",
+                            "name": "Double",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -3070,7 +3080,7 @@
                             "name": null,
                             "ofType": {
                                 "kind": "SCALAR",
-                                "name": "Float",
+                                "name": "Double",
                                 "ofType": null
                             }
                         },
@@ -3165,7 +3175,7 @@
                         "description": null,
                         "type": {
                             "kind": "SCALAR",
-                            "name": "Float",
+                            "name": "Double",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -3263,7 +3273,7 @@
                         "description": null,
                         "type": {
                             "kind": "SCALAR",
-                            "name": "Float",
+                            "name": "Double",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -3417,7 +3427,7 @@
                         "description": null,
                         "type": {
                             "kind": "SCALAR",
-                            "name": "Float",
+                            "name": "Double",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -5000,16 +5010,6 @@
             {
                 "kind": "SCALAR",
                 "name": "BigInt",
-                "description": null,
-                "fields": null,
-                "inputFields": null,
-                "interfaces": null,
-                "enumValues": null,
-                "possibleTypes": null
-            },
-            {
-                "kind": "SCALAR",
-                "name": "Double",
                 "description": null,
                 "fields": null,
                 "inputFields": null,
