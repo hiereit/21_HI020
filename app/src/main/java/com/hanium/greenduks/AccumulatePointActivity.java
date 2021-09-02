@@ -1,10 +1,12 @@
 package com.hanium.greenduks;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +23,7 @@ public class AccumulatePointActivity extends AppCompatActivity {
         TextView tvWeight = findViewById(R.id.tvWeight);
         Button btnConfirmPoint = findViewById(R.id.btnConfirmPoint);
 
+
         btnConfirmPoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -29,12 +32,6 @@ public class AccumulatePointActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        ImageView iv_qr = findViewById(R.id.iv_qr);
-        iv_qr.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
-            startActivity(intent);
-            finish();
-        });
     }
+
 }
