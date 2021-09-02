@@ -1,0 +1,34 @@
+type Box @model {
+  id: ID!
+  address: String!
+  centerId: String!
+  weight: Double!
+}
+
+type Weight @model {
+  id: ID!
+  weight: Double!
+}
+
+type Point @model {
+  id: ID!
+  userId: String!
+  date: String!
+  value: Int!
+  weight: Double
+}
+
+type Answer @model {
+  id: ID!
+  questionId: String!
+  date: String!
+  content: String!
+}
+
+type Question @model {
+  id: ID!
+  title: String!
+  content: String!
+  date: String!
+  userId: String!
+}

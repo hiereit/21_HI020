@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
             circularProgressView.setProgress((Integer) msg.obj, true);  //현재 value
             return false;
         });
-        circleProgress(userId);
+        getMyPoint(userId);
     }
 
     public String getTodayDate(){
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
         );
     }
 
-    private void circleProgress(String userId){
+    private void getMyPoint(String userId){
 
         Amplify.API.query(
                 ModelQuery.list(Point.class, Point.USER_ID.contains(userId)),
