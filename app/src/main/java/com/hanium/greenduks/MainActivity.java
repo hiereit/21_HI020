@@ -18,9 +18,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobile.client.Callback;
+import com.amazonaws.mobile.client.UserState;
+import com.amazonaws.mobile.client.UserStateDetails;
 import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.auth.AuthChannelEventName;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.core.InitializationStatus;
 import com.amplifyframework.datastore.generated.model.Point;
+import com.amplifyframework.hub.HubChannel;
 import com.google.android.material.navigation.NavigationView;
 import com.vaibhavlakhera.circularprogressview.CircularProgressView;
 
@@ -37,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
     Handler weightHandler;
     Handler valueHandler;
 
-    Context context;
     String userId = "";
     CircularProgressView circularProgressView;
     int sumValue = 0;
@@ -47,6 +52,33 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        amplifyInit(this);
+        AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
+            @Override
+            public void onResult(UserStateDetails userStateDetails) {
+                Intent i;
+                if (userStateDetails.getUserState().equals(UserState.SIGNED_IN)) {
+                    return;
+                }
+                switch (userStateDetails.getUserState()){
+                    case SIGNED_OUT:
+                        i = new Intent(MainActivity.this, LoginActivity.class);
+                        break;
+                    default:
+                        AWSMobileClient.getInstance().signOut();
+                        i = new Intent(MainActivity.this, LoginActivity.class);
+                        break;
+                }
+                startActivity(i);
+                finish();
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e(TAG, e.toString());
+            }
+        });
 
         iv_menu = findViewById(R.id.iv_menu);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -72,13 +104,11 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
 
         logoutBtn.setOnClickListener(v -> {
             AWSMobileClient.getInstance().signOut();
-            Intent i = new Intent(MainActivity.this, AuthActivity.class);
+            Intent i = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(i);
             finish();
         });
 
-        context = this.getApplicationContext();
-        amplifyInit(context);
         userId = AWSMobileClient.getInstance().getUsername();
 
         TextView tvDate = findViewById(R.id.tvMain_date);
