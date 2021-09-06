@@ -127,6 +127,11 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
             return false;
         });
         getMyPoint(userId);
+        getMyPoint(userId);
+        circularProgressView.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, PointConfirmActivity.class);
+            startActivity(i);
+        });
     }
 
     public String getTodayDate(){
