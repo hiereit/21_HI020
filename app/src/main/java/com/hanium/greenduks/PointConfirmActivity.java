@@ -1,7 +1,11 @@
 package com.hanium.greenduks;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -16,6 +20,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Point;
 import com.google.android.material.navigation.NavigationView;
 import com.vaibhavlakhera.circularprogressview.CircularProgressView;
 
@@ -24,18 +31,30 @@ import org.eazegraph.lib.models.BarModel;
 
 import java.util.ArrayList;
 
-public class PointConfirmActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
+public class PointConfirmActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface{
+
+    private static final String TAG = "PointConfirmActivity";
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
     ImageView iv_qr;
 
+    Context context;
+    String userId = "";
+
     CircularProgressView circularProgressView;
+    Handler valueHandler;
+    int sumValue = 0;
+    TextView tvPointConfirm_point;
+    TextView tvPointConfirm_remain;
+
     BarChart mBarChart;
+
 
     RecyclerView rRecyclerView;
     UsedPointAdapter upRecyclerAdapter;
     ArrayList<UsedPoint> list;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +91,24 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
             finish();
         });
 
+        context = this.getApplicationContext();
+        amplifyInit(context);
+        userId = AWSMobileClient.getInstance().getUsername();
 
-        circleProgress();
+        circularProgressView = findViewById(R.id.cpb_circlebar);
+        tvPointConfirm_point = findViewById(R.id.tvPointConfirm_point);
+        tvPointConfirm_remain = findViewById(R.id.tvPointConfirm_remain);
+        valueHandler = new Handler(Looper.getMainLooper(), msg -> {
+            circularProgressView.setProgress((Integer) msg.obj, true);  //현재 value
+            tvPointConfirm_point.setText(msg.obj.toString());
+            tvPointConfirm_remain.setText(String.valueOf(10000-(int)msg.obj));
+            return false;
+        });
+        getMyPoint(userId);
+
+
         setBarChart();
+
 
         rRecyclerView = (RecyclerView)findViewById(R.id.rvUsedPoint);
 
@@ -93,10 +127,21 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
         upRecyclerAdapter.setPointList(list);
     }
 
+    private void getMyPoint(String userId){
 
-    private void circleProgress(){
-        circularProgressView=findViewById(R.id.cpb_circlebar);
-        circularProgressView.setProgress(5000, true); //현재 value
+        Amplify.API.query(
+                ModelQuery.list(Point.class, Point.USER_ID.contains(userId)),
+                response -> {
+                    Message turnAlertMsg = new Message();
+                    for (Point point : response.getData()) {
+                        Log.i(TAG, point.getValue().toString());
+                        sumValue += point.getValue();
+                    }
+                    turnAlertMsg.obj = sumValue;
+                    valueHandler.sendMessage(turnAlertMsg);
+                },
+                error -> Log.e(TAG, "Query failure", error)
+        );
     }
 
     private void setBarChart(){
