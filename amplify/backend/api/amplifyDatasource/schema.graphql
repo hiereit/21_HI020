@@ -2,12 +2,12 @@ type Box @model {
   id: ID!
   address: String!
   centerId: String!
-  weight: Double!
+  weight: Float!
 }
 
 type Weight @model {
   id: ID!
-  weight: Double!
+  weight: Float!
 }
 
 type Point @model {
@@ -15,7 +15,7 @@ type Point @model {
   userId: String!
   date: String!
   value: Int!
-  weight: Double
+  weight: Float
 }
 
 type Answer @model {
