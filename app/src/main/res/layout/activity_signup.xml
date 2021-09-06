@@ -17,38 +17,43 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/linearLayout7"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <include
-                    layout="@layout/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp" />
-            </LinearLayout>
-
             <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#A9D0F5"
+                    android:minHeight="?attr/actionBarSize"
+                    android:theme="?attr/actionBarTheme"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="회원가입"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/linearLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="60dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar3">
 
                     <EditText
                         android:id="@+id/etEmail"
@@ -63,26 +68,13 @@
                         android:textSize="15sp" />
 
                     <EditText
-                        android:id="@+id/etName"
+                        android:id="@+id/etId"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginBottom="20dp"
                         android:background="@drawable/edit_background"
                         android:ems="10"
                         android:hint="아이디"
-                        android:inputType="textPersonName"
-                        android:padding="15dp"
-                        android:textSize="15sp" />
-
-                    <EditText
-                        android:id="@+id/etNickName"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/edit_background"
-                        android:ems="10"
-                        android:enabled="false"
-                        android:hint="(닉네임) x"
                         android:inputType="textPersonName"
                         android:padding="15dp"
                         android:textSize="15sp" />
@@ -111,18 +103,6 @@
                         android:padding="15dp"
                         android:textSize="15sp" />
 
-                    <EditText
-                        android:id="@+id/etPhone"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@drawable/edit_background"
-                        android:ems="10"
-                        android:enabled="false"
-                        android:hint="(전화번호)x"
-                        android:inputType="phone"
-                        android:padding="15dp"
-                        android:textSize="15sp" />
-
                 </LinearLayout>
 
                 <Button
@@ -130,7 +110,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginStart="60dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="100dp"
                     android:layout_marginEnd="60dp"
                     android:backgroundTint="#0080ff"
                     android:text="이메일 인증하기"
@@ -142,13 +122,5 @@
         </LinearLayout>
     </ScrollView>
 
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/navi_header"
-        app:menu="@menu/navi_menu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
