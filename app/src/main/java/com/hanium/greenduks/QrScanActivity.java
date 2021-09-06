@@ -2,6 +2,7 @@ package com.hanium.greenduks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,12 +27,12 @@ public class QrScanActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() != null) {
-//                Toast.makeText(this, "취소", Toast.LENGTH_LONG).show();
-//            } else {
-//                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();//
+                Log.d("yyj", "qr 코드: " + result.getContents());
+                Intent intent = new Intent(this, SeparateActivity.class);
+                intent.putExtra("address", result.getContents());
+                startActivity(intent);
+                finish();
             }
-            //add after scanned
-            finish();
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }

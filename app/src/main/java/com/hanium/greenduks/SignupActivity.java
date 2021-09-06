@@ -21,8 +21,7 @@ import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.google.android.material.navigation.NavigationView;
 
-public class SignupActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface {
-    DrawerLayout drawerLayout;
+public class SignupActivity extends AppCompatActivity implements AmplifyInterface {
     public static Activity SignUp;
 
     @Override
@@ -32,21 +31,12 @@ public class SignupActivity extends AppCompatActivity implements NavigationInter
 
         SignUp = SignupActivity.this;
 
-        ImageView iv_menu = findViewById(R.id.iv_menu);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        TextView toolbar_name = findViewById(R.id.tvToolbar_name);
-
-        initializeLayout(iv_menu, drawerLayout, toolbar_name, "회원 가입");
-        setNavigationViewListener();
-
         amplifyInit(this.getApplicationContext());
 
         EditText etEmail = findViewById(R.id.etEmail);
-        EditText etName = findViewById(R.id.etName);
-        EditText etNickName = findViewById(R.id.etNickName);
+        EditText etName = findViewById(R.id.etId);
         EditText etPw = findViewById(R.id.etPw);
         EditText etConfirmPw = findViewById(R.id.etConfirmPw);
-        EditText etPhone = findViewById(R.id.etPhone);
         Button btnEmailConfirm = findViewById(R.id.btnEmailConfirm);
 
         //비밀번호 형식 검사 추가 -> error에서 나옴
@@ -81,16 +71,5 @@ public class SignupActivity extends AppCompatActivity implements NavigationInter
             startActivity(intent);
             finish();
         });
-    }
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        startActivity(nextIntent(item, this, drawerLayout));
-        finish();
-        return true;
-    }
-
-    public void setNavigationViewListener() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 }

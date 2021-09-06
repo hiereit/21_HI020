@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +23,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobile.client.Callback;
+import com.amazonaws.mobile.client.UserState;
+import com.amazonaws.mobile.client.UserStateDetails;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
@@ -27,26 +34,35 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class LoginActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface {
+public class LoginActivity extends AppCompatActivity implements AmplifyInterface {
     private String[] members = new String[]{"일반 회원", "수거 업체", "관리자"};
     private int member;
-    DrawerLayout drawerLayout;
     EditText etLoginId;
     EditText etLoginPw;
+    Handler loginHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ImageView iv_menu = findViewById(R.id.iv_menu);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        TextView toolbar_name = findViewById(R.id.tvToolbar_name);
-
-        initializeLayout(iv_menu, drawerLayout, toolbar_name, "로그인");
-        setNavigationViewListener();
-
         amplifyInit(this.getApplicationContext());
+
+        AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
+            @Override
+            public void onResult(UserStateDetails userStateDetails) {
+                if (userStateDetails.getUserState().equals(UserState.SIGNED_IN)) {
+                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.e("LoginActivity", e.toString());
+            }
+        });
 
         etLoginId = findViewById(R.id.etLoginId);
         etLoginPw = findViewById(R.id.etLoginPw);
@@ -90,14 +106,23 @@ public class LoginActivity extends AppCompatActivity implements NavigationInterf
                                 finish();
                             }
                             else {
-                                Toast.makeText(LoginActivity.this, "아이디 또는 비밀번호를 확인하세요.", Toast.LENGTH_SHORT).show();
+                                Message turnAlertMsg = new Message();
+                                turnAlertMsg.obj = "아이디 또는 비밀번호를 확인하세요.";
+                                loginHandler.sendMessage(turnAlertMsg);
                             }
                         },
                         error -> {
-                            Toast.makeText(LoginActivity.this, "아이디 또는 비밀번호를 확인하세요.", Toast.LENGTH_SHORT).show();
+                            Message turnAlertMsg = new Message();
+                            turnAlertMsg.obj = "아이디 또는 비밀번호를 확인하세요.";
+                            loginHandler.sendMessage(turnAlertMsg);
                         }
                 );
             }
+        });
+
+        loginHandler = new Handler(Looper.getMainLooper(), msg -> {
+            Toast.makeText(LoginActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
+            return false;
         });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
@@ -108,24 +133,5 @@ public class LoginActivity extends AppCompatActivity implements NavigationInterf
                 finish();
             }
         });
-
-        ImageView iv_qr = findViewById(R.id.iv_qr);
-        iv_qr.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
-            startActivity(intent);
-            finish();
-        });
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        startActivity(nextIntent(item, this, drawerLayout));
-        finish();
-        return true;
-    }
-
-    public void setNavigationViewListener() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 }
