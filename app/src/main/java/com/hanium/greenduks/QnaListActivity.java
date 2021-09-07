@@ -1,7 +1,11 @@
 package com.hanium.greenduks;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -17,11 +21,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Answer;
+import com.amplifyframework.datastore.generated.model.Question;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class QnaListActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
+public class QnaListActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface{
+
+    private static final String TAG = "QnaListActivity";
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
@@ -30,6 +40,21 @@ public class QnaListActivity extends AppCompatActivity implements NavigationInte
     RecyclerView qRecyclerView;
     QnaAdapter qRecyclerAdapter;
     ArrayList<Qna> list;
+
+    Context context;
+    String userId = "";
+    String state = "";
+    String title = "";
+    String date = "";
+    ArrayList<String> titleList = new ArrayList<>();
+    ArrayList<String> dateList = new ArrayList<>();
+    ArrayList<String> stateList = new ArrayList<>();
+
+    ArrayList<Qna> qnaList = new ArrayList<Qna>();
+
+    Handler getStateHandler;
+    Handler getTitleAndDateHandler;
+    Handler getDateHandler;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +89,10 @@ public class QnaListActivity extends AppCompatActivity implements NavigationInte
             startActivity(i);
             finish();
         });
+        context = this.getApplicationContext();
+        amplifyInit(context);
+        userId = AWSMobileClient.getInstance().getUsername();
+
 
         qRecyclerView = (RecyclerView)findViewById(R.id.rvQna);
 
@@ -76,15 +105,75 @@ public class QnaListActivity extends AppCompatActivity implements NavigationInte
 
         /* adapt data */
         list = new ArrayList<Qna>();
-        for(int i = 1; i <= 10; i++){
-            if(i % 2 == 0)
-                list.add(new Qna("답변완료", "문의 제목입니다.(test)", "2021-08-12"));
-            else
-                list.add(new Qna("미답변", "문의 제목입니다.(test)", "2021-08-12"));
-        }
+
+        getTitleAndDateHandler = new Handler(Looper.getMainLooper(), msg -> {
+            title = msg.obj.toString();
+
+//            Log.d(TAG, "!!!!!!!!!!!!!!!!!!!!!!!titleList: " + titleList);
+//            Log.d(TAG, "!!!!!!!!!!!!!!!!!!!!!!!dateList: " + dateList);
+//
+            Log.d(TAG, "여기가! " + title);
+
+            return false;
+        });
+
+        setList(userId);
+
 
         qRecyclerAdapter.setQnaList(list);
     }
+
+    public void setList(String userId){
+        Amplify.API.query(
+                ModelQuery.list(Question.class, Question.USER_ID.contains(userId)),
+                response -> {
+                    Message titleMsg = new Message();
+
+                    getStateHandler = new Handler(Looper.getMainLooper(), msg -> {
+                        state = msg.obj.toString();
+                        stateList.add(state);
+
+                        Log.d(TAG, "!!!!!!!!stateList: " + stateList.toString());
+                        Log.d(TAG, "!!!!!!!!state????: " + state);
+                        return false;
+                    });
+
+                    for (Question question : response.getData()) {
+                        Log.i("MyAmplifyApp", question.getTitle());
+
+                        setAnswerState(userId, question.getId());
+
+                        titleList.add(question.getTitle());
+                        dateList.add(question.getDate());
+
+                        list.add(new Qna(state, question.getTitle(), question.getDate()));
+//                        Log.d(TAG, "getStateHandler에서??????????? " + list.toString());
+                    }
+                    titleMsg.obj = list;
+                    getTitleAndDateHandler.sendMessage(titleMsg);
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
+    }
+
+    public void setAnswerState(String userId, String questionId){
+        Amplify.API.query(
+                ModelQuery.get(Answer.class, questionId),
+                response -> {
+                    Message turnAlertMsg = new Message();
+                    if(response.getData() == null){
+                        turnAlertMsg.obj = "미답변";
+                        state = "미답변";
+                    }else{
+                        turnAlertMsg.obj = "답변완료";
+                        state = "답변완료";
+                    }
+                    getStateHandler.sendMessage(turnAlertMsg);
+                },
+                error -> Log.e("MyAmplifyApp", error.toString(), error)
+        );
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

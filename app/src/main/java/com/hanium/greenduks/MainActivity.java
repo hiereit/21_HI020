@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
             return false;
         });
         getMyPoint(userId);
-        getMyPoint(userId);
         circularProgressView.setOnClickListener(v -> {
             Intent i = new Intent(MainActivity.this, PointConfirmActivity.class);
             startActivity(i);
@@ -194,6 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
                 ModelQuery.list(Point.class, Point.USER_ID.contains(userId)),
                 response -> {
                     Message turnAlertMsg = new Message();
+                    sumValue = 0;
                     for (Point point : response.getData()) {
                         Log.i(TAG, point.getValue().toString());
                         sumValue += point.getValue();

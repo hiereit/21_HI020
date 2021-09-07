@@ -110,6 +110,7 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
         setBarChart();
 
 
+
         rRecyclerView = (RecyclerView)findViewById(R.id.rvUsedPoint);
 
         /* initiate adapter */

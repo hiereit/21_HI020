@@ -7,6 +7,11 @@ public class Qna {
 
     public Qna(){}
 
+    public Qna(String title, String date) {
+        this.title = title;
+        this.date = date;
+    }
+
     public Qna(String state, String title, String date) {
         this.state = state;
         this.title = title;
@@ -35,5 +40,14 @@ public class Qna {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Qna{" +
+                "state='" + state + '\'' +
+                ", title='" + title + '\'' +
+                ", date='" + date + '\'' +
+                '}';
     }
 }
