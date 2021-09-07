@@ -29,22 +29,12 @@ public class SeparateActivity extends AppCompatActivity implements NavigationInt
         initializeLayout(iv_menu, drawerLayout, toolbar_name, "배출하기");
         setNavigationViewListener();
 
-        Button btnScan = findViewById(R.id.btnScan);
         Button btnCompSeparate = findViewById(R.id.btnCompSeparate);
-
-        btnScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SeparateActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         btnCompSeparate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SeparateActivity.this, MainActivity.class);
+                Intent intent = new Intent(SeparateActivity.this, AccumulatePointActivity.class);
                 startActivity(intent);
                 finish();
             }
