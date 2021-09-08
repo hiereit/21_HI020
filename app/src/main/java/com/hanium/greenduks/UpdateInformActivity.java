@@ -50,7 +50,6 @@ public class UpdateInformActivity extends AppCompatActivity implements Navigatio
         EditText etPw = findViewById(R.id.etPw);
         EditText etNewPw = findViewById(R.id.etNewPw);
         Button btnCompUpdate = findViewById(R.id.btnCompUpdate);
-        Button btnWithdrawal = findViewById(R.id.btnWithdrawal);
 
         Amplify.Auth.fetchUserAttributes(
                 attributes -> etEmail.setText(attributes.get(2).getValue()),
@@ -85,24 +84,6 @@ public class UpdateInformActivity extends AppCompatActivity implements Navigatio
             return false;
         });
 
-        btnWithdrawal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(UpdateInformActivity.this);
-
-                builder.setMessage("회원 탈퇴를 진행하시겠습니까?")
-                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        Intent intent = new Intent(UpdateInformActivity.this, LoginActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                })
-                        .setNegativeButton("아니오", null);
-                builder.show();
-            }
-        });
         ImageView iv_qr = findViewById(R.id.iv_qr);
         iv_qr.setOnClickListener(v -> {
             Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
@@ -135,30 +116,5 @@ public class UpdateInformActivity extends AppCompatActivity implements Navigatio
     public void setNavigationViewListener() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
         navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    public class informtask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            HashMap<String, String> hashMap  = null;
-            try {
-                hashMap = (HashMap<String, String>) AWSMobileClient.getInstance().getUserAttributes();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            for(String key : hashMap.keySet()){
-
-                String value = hashMap.get(key);
-
-                Log.d("yyj",key+" : "+value);
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-        }
     }
 }

@@ -25,6 +25,7 @@
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"/>
 
+        <activity android:name=".testActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".AccumulatePointActivity"/>
         <activity android:name=".CenterMainActivity"/>
