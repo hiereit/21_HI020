@@ -2,6 +2,9 @@ package com.hanium.greenduks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +22,7 @@ import com.amplifyframework.core.Amplify;
 import com.google.android.material.navigation.NavigationView;
 
 public class ConfirmEmailActivity extends AppCompatActivity implements AmplifyInterface {
+    Handler signUpHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,11 @@ public class ConfirmEmailActivity extends AppCompatActivity implements AmplifyIn
         btnCompSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (etConfirmNumber.getText().toString().replace(" ", "").equals("") || etConfirmNumber.getText() == null) {
+                    Toast.makeText(ConfirmEmailActivity.this, "인증 번호를 입력하세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 Intent signUpIntent = getIntent();
                 Amplify.Auth.confirmSignUp(
                         signUpIntent.getStringExtra("userName"),
@@ -46,18 +55,22 @@ public class ConfirmEmailActivity extends AppCompatActivity implements AmplifyIn
                                 finish();
                             }
                             else {
-                                Toast.makeText(ConfirmEmailActivity.this, result.toString(), Toast.LENGTH_SHORT).show();
+                                Message turnAlertMsg = new Message();
+                                turnAlertMsg.obj = result.toString();
+                                signUpHandler.sendMessage(turnAlertMsg);
                             }
                         },
-                        error -> Log.d("AuthQuickstart", error.toString())
+                        error -> {
+                            Message turnAlertMsg = new Message();
+                            turnAlertMsg.obj = error.getMessage();
+                            signUpHandler.sendMessage(turnAlertMsg);
+                        }
                 );
             }
         });
-        ImageView iv_qr = findViewById(R.id.iv_qr);
-        iv_qr.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
-            startActivity(intent);
-            finish();
+        signUpHandler = new Handler(Looper.getMainLooper(), msg -> {
+            Toast.makeText(ConfirmEmailActivity.this, msg.obj.toString(), Toast.LENGTH_SHORT).show();
+            return false;
         });
     }
 }

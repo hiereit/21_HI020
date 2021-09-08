@@ -86,12 +86,20 @@ public class LoginActivity extends AppCompatActivity implements AmplifyInterface
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (etLoginId.getText().toString().replace(" ", "").equals("") || etLoginId.getText() == null) {
+                    Toast.makeText(LoginActivity.this, "아이디를 입력하세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (etLoginPw.getText().toString().replace(" ", "").equals("") || etLoginPw.getText() == null) {
+                    Toast.makeText(LoginActivity.this, "비밀번호를 입력하세요.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Amplify.Auth.signIn(
                         etLoginId.getText().toString(),
                         etLoginPw.getText().toString(),
                         result -> {
                             if (result.isSignInComplete()){
-                                Class nextActivity = null;
+                                Class nextActivity;
                                 if (member == 0) {
                                     nextActivity = MainActivity.class;
                                 }
@@ -107,13 +115,13 @@ public class LoginActivity extends AppCompatActivity implements AmplifyInterface
                             }
                             else {
                                 Message turnAlertMsg = new Message();
-                                turnAlertMsg.obj = "아이디 또는 비밀번호를 확인하세요.";
+                                turnAlertMsg.obj = result.toString();
                                 loginHandler.sendMessage(turnAlertMsg);
                             }
                         },
                         error -> {
                             Message turnAlertMsg = new Message();
-                            turnAlertMsg.obj = "아이디 또는 비밀번호를 확인하세요.";
+                            turnAlertMsg.obj = error.getMessage();
                             loginHandler.sendMessage(turnAlertMsg);
                         }
                 );
