@@ -112,6 +112,7 @@ public class PointReturnActivity extends AppCompatActivity implements Navigation
                         .userId(userId)
                         .date(String.valueOf(System.currentTimeMillis()))
                         .value(-returnPoint)
+                        .weight((double) 0)
                         .id(uniqueID)
                         .build();
 
