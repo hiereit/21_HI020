@@ -133,6 +133,31 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        TextView tvDate = findViewById(R.id.tvMain_date);
+        tvDate.setText(getTodayDate());
+
+        TextView tvWeight = findViewById(R.id.tvMain_weight);
+        weightHandler = new Handler(Looper.getMainLooper(), msg -> {
+            tvWeight.setText(msg.obj.toString());
+            return false;
+        });
+        getMyWeight(userId);
+
+        circularProgressView=findViewById(R.id.cpb_circlebar);
+        valueHandler = new Handler(Looper.getMainLooper(), msg -> {
+            circularProgressView.setProgress((Integer) msg.obj, true);  //현재 value
+            return false;
+        });
+        getMyPoint(userId);
+        circularProgressView.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, PointConfirmActivity.class);
+            startActivity(i);
+        });
+    }
+
     public String getTodayDate(){
         Calendar cal = Calendar.getInstance();
 
