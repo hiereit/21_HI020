@@ -21,12 +21,6 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/navi_menu_ranking"
-        android:title="수거왕"
-        android:icon="@drawable/crown_img"
-        app:showAsAction="never"/>
-
-    <item
         android:id="@+id/navi_menu_register_question"
         android:title="문의하기"
         android:icon="@drawable/registerquestion_img"

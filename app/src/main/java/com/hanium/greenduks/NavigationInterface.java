@@ -37,9 +37,6 @@ public interface NavigationInterface {
             case R.id.navi_menu_return:
                 intent = new Intent(context, PointReturnActivity.class);
                 break;
-            case R.id.navi_menu_ranking:
-                intent = new Intent(context, RankingActivity.class);
-                break;
             case R.id.navi_menu_register_question:
                 intent = new Intent(context, QnaRegisterActivity.class);
                 break;

@@ -87,7 +87,7 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
 
         logoutBtn.setOnClickListener(v -> {
             AWSMobileClient.getInstance().signOut();
-            Intent i = new Intent(PointConfirmActivity.this, AuthActivity.class);
+            Intent i = new Intent(PointConfirmActivity.this, LoginActivity.class);
             startActivity(i);
             finish();
         });

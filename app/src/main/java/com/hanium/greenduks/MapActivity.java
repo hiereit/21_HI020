@@ -71,7 +71,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         logoutBtn.setOnClickListener(v -> {
             AWSMobileClient.getInstance().signOut();
-            Intent i = new Intent(MapActivity.this, AuthActivity.class);
+            Intent i = new Intent(MapActivity.this, LoginActivity.class);
             startActivity(i);
             finish();
         });

@@ -81,7 +81,7 @@ public class PointReturnActivity extends AppCompatActivity implements Navigation
 
         logoutBtn.setOnClickListener(v -> {
             AWSMobileClient.getInstance().signOut();
-            Intent i = new Intent(PointReturnActivity.this, AuthActivity.class);
+            Intent i = new Intent(PointReturnActivity.this, LoginActivity.class);
             startActivity(i);
             finish();
         });

@@ -53,7 +53,7 @@ public class LicenseActivity extends AppCompatActivity implements NavigationInte
 
         logoutBtn.setOnClickListener(v -> {
             AWSMobileClient.getInstance().signOut();
-            Intent i = new Intent(LicenseActivity.this, AuthActivity.class);
+            Intent i = new Intent(LicenseActivity.this, LoginActivity.class);
             startActivity(i);
             finish();
         });

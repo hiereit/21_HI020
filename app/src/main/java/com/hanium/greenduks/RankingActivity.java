@@ -67,7 +67,7 @@ public class RankingActivity extends AppCompatActivity implements NavigationInte
 
         logoutBtn.setOnClickListener(v -> {
             AWSMobileClient.getInstance().signOut();
-            Intent i = new Intent(RankingActivity.this, AuthActivity.class);
+            Intent i = new Intent(RankingActivity.this, LoginActivity.class);
             startActivity(i);
             finish();
         });
