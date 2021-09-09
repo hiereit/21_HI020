@@ -8,6 +8,9 @@ mutation CreateBox(
     address
     centerId
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -21,6 +24,9 @@ mutation UpdateBox(
     address
     centerId
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -34,6 +40,9 @@ mutation DeleteBox(
     address
     centerId
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -45,6 +54,9 @@ mutation CreateWeight(
   createWeight(input: $input, condition: $condition) {
     id
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -56,6 +68,9 @@ mutation UpdateWeight(
   updateWeight(input: $input, condition: $condition) {
     id
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -67,6 +82,9 @@ mutation DeleteWeight(
   deleteWeight(input: $input, condition: $condition) {
     id
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -81,6 +99,9 @@ mutation CreatePoint(
     date
     value
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -95,6 +116,9 @@ mutation UpdatePoint(
     date
     value
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -109,6 +133,9 @@ mutation DeletePoint(
     date
     value
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -122,6 +149,9 @@ mutation CreateAnswer(
     questionId
     date
     content
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -135,6 +165,9 @@ mutation UpdateAnswer(
     questionId
     date
     content
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -148,6 +181,9 @@ mutation DeleteAnswer(
     questionId
     date
     content
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -162,6 +198,10 @@ mutation CreateQuestion(
     content
     date
     userId
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -176,6 +216,10 @@ mutation UpdateQuestion(
     content
     date
     userId
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -190,6 +234,10 @@ mutation DeleteQuestion(
     content
     date
     userId
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }

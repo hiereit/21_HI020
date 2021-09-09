@@ -22,11 +22,11 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 public final class Box implements Model {
   public static final QueryField ID = field("Box", "id");
   public static final QueryField ADDRESS = field("Box", "address");
-  public static final QueryField CENTER_ID = field("Box", "center_id");
+  public static final QueryField CENTER_ID = field("Box", "centerId");
   public static final QueryField WEIGHT = field("Box", "weight");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String address;
-  private final @ModelField(targetType="String", isRequired = true) String center_id;
+  private final @ModelField(targetType="String", isRequired = true) String centerId;
   private final @ModelField(targetType="Float", isRequired = true) Double weight;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
@@ -39,7 +39,7 @@ public final class Box implements Model {
   }
   
   public String getCenterId() {
-      return center_id;
+      return centerId;
   }
   
   public Double getWeight() {
@@ -54,10 +54,10 @@ public final class Box implements Model {
       return updatedAt;
   }
   
-  private Box(String id, String address, String center_id, Double weight) {
+  private Box(String id, String address, String centerId, Double weight) {
     this.id = id;
     this.address = address;
-    this.center_id = center_id;
+    this.centerId = centerId;
     this.weight = weight;
   }
   
@@ -97,7 +97,7 @@ public final class Box implements Model {
       .append("Box {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("address=" + String.valueOf(getAddress()) + ", ")
-      .append("center_id=" + String.valueOf(getCenterId()) + ", ")
+      .append("centerId=" + String.valueOf(getCenterId()) + ", ")
       .append("weight=" + String.valueOf(getWeight()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
@@ -139,7 +139,7 @@ public final class Box implements Model {
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
       address,
-      center_id,
+      centerId,
       weight);
   }
   public interface AddressStep {
@@ -166,7 +166,7 @@ public final class Box implements Model {
   public static class Builder implements AddressStep, CenterIdStep, WeightStep, BuildStep {
     private String id;
     private String address;
-    private String center_id;
+    private String centerId;
     private Double weight;
     @Override
      public Box build() {
@@ -175,7 +175,7 @@ public final class Box implements Model {
         return new Box(
           id,
           address,
-          center_id,
+          centerId,
           weight);
     }
     
@@ -189,7 +189,7 @@ public final class Box implements Model {
     @Override
      public WeightStep centerId(String centerId) {
         Objects.requireNonNull(centerId);
-        this.center_id = centerId;
+        this.centerId = centerId;
         return this;
     }
     

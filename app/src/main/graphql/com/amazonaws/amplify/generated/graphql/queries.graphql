@@ -1,10 +1,40 @@
 # this is an auto generated file. This will be overwritten
+query SyncBoxes(
+  $filter: ModelBoxFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncBoxes(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      address
+      centerId
+      weight
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
 query GetBox($id: ID!) {
   getBox(id: $id) {
     id
     address
     centerId
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -16,16 +46,48 @@ query ListBoxes($filter: ModelBoxFilterInput, $limit: Int, $nextToken: String) {
       address
       centerId
       weight
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
+    startedAt
+  }
+}
+query SyncWeights(
+  $filter: ModelWeightFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncWeights(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      weight
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
   }
 }
 query GetWeight($id: ID!) {
   getWeight(id: $id) {
     id
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -39,10 +101,42 @@ query ListWeights(
     items {
       id
       weight
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
+    startedAt
+  }
+}
+query SyncPoints(
+  $filter: ModelPointFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncPoints(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      userId
+      date
+      value
+      weight
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
   }
 }
 query GetPoint($id: ID!) {
@@ -52,6 +146,9 @@ query GetPoint($id: ID!) {
     date
     value
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -68,10 +165,41 @@ query ListPoints(
       date
       value
       weight
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
+    startedAt
+  }
+}
+query SyncAnswers(
+  $filter: ModelAnswerFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncAnswers(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      questionId
+      date
+      content
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
   }
 }
 query GetAnswer($id: ID!) {
@@ -80,6 +208,9 @@ query GetAnswer($id: ID!) {
     questionId
     date
     content
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -95,10 +226,43 @@ query ListAnswers(
       questionId
       date
       content
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
+    startedAt
+  }
+}
+query SyncQuestions(
+  $filter: ModelQuestionFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncQuestions(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      title
+      content
+      date
+      userId
+      state
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
   }
 }
 query GetQuestion($id: ID!) {
@@ -108,6 +272,10 @@ query GetQuestion($id: ID!) {
     content
     date
     userId
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -124,9 +292,14 @@ query ListQuestions(
       content
       date
       userId
+      state
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
+    startedAt
   }
 }

@@ -2,6 +2,8 @@ package com.hanium.greenduks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -22,7 +24,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
 
-public class RankingActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener{
+public class RankingActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface{
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
@@ -32,10 +34,14 @@ public class RankingActivity extends AppCompatActivity implements NavigationInte
     RankingAdapter rRecyclerAdapter;
     ArrayList<Ranking> list;
 
+    Handler rankHandler;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
+
+        amplifyInit(this);
 
         iv_menu = findViewById(R.id.iv_menu);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -77,6 +83,7 @@ public class RankingActivity extends AppCompatActivity implements NavigationInte
 
         /* adapt data */
        list = new ArrayList<Ranking>();
+
        for(int i = 0; i <= 10; i++){
            int imgName = -1;
            list.add(new Ranking(i+1, "testNickname", 10-i));
@@ -99,6 +106,10 @@ public class RankingActivity extends AppCompatActivity implements NavigationInte
        }
 
        rRecyclerAdapter.setRankList(list);
+    }
+
+    public void getRank(){
+
     }
 
     @Override

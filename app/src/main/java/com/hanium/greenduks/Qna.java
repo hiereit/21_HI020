@@ -1,6 +1,7 @@
 package com.hanium.greenduks;
 
 public class Qna {
+    private String id;
     private String state;
     private String title;
     private String date;
@@ -16,6 +17,21 @@ public class Qna {
         this.state = state;
         this.title = title;
         this.date = date;
+    }
+
+    public Qna(String id, String state, String title, String date) {
+        this.id = id;
+        this.state = state;
+        this.title = title;
+        this.date = date;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getState() {
@@ -45,7 +61,8 @@ public class Qna {
     @Override
     public String toString() {
         return "Qna{" +
-                "state='" + state + '\'' +
+                "id='" + id + '\'' +
+                ", state='" + state + '\'' +
                 ", title='" + title + '\'' +
                 ", date='" + date + '\'' +
                 '}';

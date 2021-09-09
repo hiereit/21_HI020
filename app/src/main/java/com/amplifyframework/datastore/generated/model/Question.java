@@ -25,11 +25,13 @@ public final class Question implements Model {
   public static final QueryField CONTENT = field("Question", "content");
   public static final QueryField DATE = field("Question", "date");
   public static final QueryField USER_ID = field("Question", "userId");
+  public static final QueryField STATE = field("Question", "state");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String", isRequired = true) String content;
   private final @ModelField(targetType="String", isRequired = true) String date;
   private final @ModelField(targetType="String", isRequired = true) String userId;
+  private final @ModelField(targetType="String", isRequired = true) String state;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -52,6 +54,10 @@ public final class Question implements Model {
       return userId;
   }
   
+  public String getState() {
+      return state;
+  }
+  
   public Temporal.DateTime getCreatedAt() {
       return createdAt;
   }
@@ -60,12 +66,13 @@ public final class Question implements Model {
       return updatedAt;
   }
   
-  private Question(String id, String title, String content, String date, String userId) {
+  private Question(String id, String title, String content, String date, String userId, String state) {
     this.id = id;
     this.title = title;
     this.content = content;
     this.date = date;
     this.userId = userId;
+    this.state = state;
   }
   
   @Override
@@ -81,6 +88,7 @@ public final class Question implements Model {
               ObjectsCompat.equals(getContent(), question.getContent()) &&
               ObjectsCompat.equals(getDate(), question.getDate()) &&
               ObjectsCompat.equals(getUserId(), question.getUserId()) &&
+              ObjectsCompat.equals(getState(), question.getState()) &&
               ObjectsCompat.equals(getCreatedAt(), question.getCreatedAt()) &&
               ObjectsCompat.equals(getUpdatedAt(), question.getUpdatedAt());
       }
@@ -94,6 +102,7 @@ public final class Question implements Model {
       .append(getContent())
       .append(getDate())
       .append(getUserId())
+      .append(getState())
       .append(getCreatedAt())
       .append(getUpdatedAt())
       .toString()
@@ -109,6 +118,7 @@ public final class Question implements Model {
       .append("content=" + String.valueOf(getContent()) + ", ")
       .append("date=" + String.valueOf(getDate()) + ", ")
       .append("userId=" + String.valueOf(getUserId()) + ", ")
+      .append("state=" + String.valueOf(getState()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
       .append("updatedAt=" + String.valueOf(getUpdatedAt()))
       .append("}")
@@ -143,6 +153,7 @@ public final class Question implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -152,7 +163,8 @@ public final class Question implements Model {
       title,
       content,
       date,
-      userId);
+      userId,
+      state);
   }
   public interface TitleStep {
     ContentStep title(String title);
@@ -170,7 +182,12 @@ public final class Question implements Model {
   
 
   public interface UserIdStep {
-    BuildStep userId(String userId);
+    StateStep userId(String userId);
+  }
+  
+
+  public interface StateStep {
+    BuildStep state(String state);
   }
   
 
@@ -180,12 +197,13 @@ public final class Question implements Model {
   }
   
 
-  public static class Builder implements TitleStep, ContentStep, DateStep, UserIdStep, BuildStep {
+  public static class Builder implements TitleStep, ContentStep, DateStep, UserIdStep, StateStep, BuildStep {
     private String id;
     private String title;
     private String content;
     private String date;
     private String userId;
+    private String state;
     @Override
      public Question build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
@@ -195,7 +213,8 @@ public final class Question implements Model {
           title,
           content,
           date,
-          userId);
+          userId,
+          state);
     }
     
     @Override
@@ -220,9 +239,16 @@ public final class Question implements Model {
     }
     
     @Override
-     public BuildStep userId(String userId) {
+     public StateStep userId(String userId) {
         Objects.requireNonNull(userId);
         this.userId = userId;
+        return this;
+    }
+    
+    @Override
+     public BuildStep state(String state) {
+        Objects.requireNonNull(state);
+        this.state = state;
         return this;
     }
     
@@ -238,12 +264,13 @@ public final class Question implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String content, String date, String userId) {
+    private CopyOfBuilder(String id, String title, String content, String date, String userId, String state) {
       super.id(id);
       super.title(title)
         .content(content)
         .date(date)
-        .userId(userId);
+        .userId(userId)
+        .state(state);
     }
     
     @Override
@@ -264,6 +291,11 @@ public final class Question implements Model {
     @Override
      public CopyOfBuilder userId(String userId) {
       return (CopyOfBuilder) super.userId(userId);
+    }
+    
+    @Override
+     public CopyOfBuilder state(String state) {
+      return (CopyOfBuilder) super.state(state);
     }
   }
   

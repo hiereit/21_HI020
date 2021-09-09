@@ -1,5 +1,7 @@
 package com.hanium.greenduks;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,10 @@ import java.util.ArrayList;
 
 public class QnaAdapter extends RecyclerView.Adapter<QnaAdapter.ViewHolder> {
 
+    private static final String TAG = "QnaAdapter";
+
     private ArrayList<Qna> list;
+    private static ClickListener clickListener;
 
     public void setQnaList(ArrayList<Qna> list) {
         this.list = list;
@@ -57,6 +62,8 @@ public class QnaAdapter extends RecyclerView.Adapter<QnaAdapter.ViewHolder> {
                     int pos = getAdapterPosition();
                     if(pos != RecyclerView.NO_POSITION){
                         //해당 pos의 QnaBoard 페이지로 이동하는 코드 작성
+                        Log.d(TAG, "!!!" + pos);
+                        clickListener.onItemClick(getAdapterPosition(), v);
                     }
                 }
             });
@@ -67,5 +74,12 @@ public class QnaAdapter extends RecyclerView.Adapter<QnaAdapter.ViewHolder> {
             title.setText(item.getTitle());
             date.setText(item.getDate());
         }
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        QnaAdapter.clickListener = clickListener;
+    }
+    public interface ClickListener {
+        void onItemClick(int position, View v);
     }
 }
