@@ -76,7 +76,7 @@ public class QnaBoardActivity extends AppCompatActivity implements NavigationInt
 
         logoutBtn.setOnClickListener(v -> {
             AWSMobileClient.getInstance().signOut();
-            Intent i = new Intent(QnaBoardActivity.this, AuthActivity.class);
+            Intent i = new Intent(QnaBoardActivity.this, LoginActivity.class);
             startActivity(i);
             finish();
         });

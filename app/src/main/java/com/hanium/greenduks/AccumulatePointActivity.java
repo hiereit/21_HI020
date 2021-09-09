@@ -54,7 +54,7 @@ public class AccumulatePointActivity extends AppCompatActivity implements Amplif
 
         weightHandler = new Handler(Looper.getMainLooper(), msg -> {
             double weight = Double.parseDouble(msg.obj.toString());
-            int pointValue = (int) (weight * 0.1 * 50);
+            int pointValue = (int) (weight * 500);
 
             Log.d("yyj", "무게: " + weight + ",,,포인트: " + pointValue);
 

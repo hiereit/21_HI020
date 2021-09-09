@@ -101,7 +101,7 @@ public class UpdateInformActivity extends AppCompatActivity implements Navigatio
 
         logoutBtn.setOnClickListener(v -> {
             AWSMobileClient.getInstance().signOut();
-            Intent i = new Intent(UpdateInformActivity.this, AuthActivity.class);
+            Intent i = new Intent(UpdateInformActivity.this, LoginActivity.class);
             startActivity(i);
             finish();
         });

@@ -201,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements NavigationInterfa
                 ModelQuery.list(Point.class, Point.USER_ID.contains(userId)),
                 response -> {
                     Message turnAlertMsg = new Message();
+                    sumWeight = 0.0;
                     for (Point point : response.getData()) {
                         Log.i(TAG, point.getWeight().toString());
                         sumWeight += point.getWeight();
