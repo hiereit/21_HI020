@@ -1,7 +1,9 @@
 package com.hanium.greenduks;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -13,63 +15,86 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobileconnectors.iot.AWSIotMqttClientStatusCallback;
+import com.amazonaws.mobileconnectors.iot.AWSIotMqttManager;
+import com.amazonaws.mobileconnectors.iot.AWSIotMqttQos;
+import com.amazonaws.regions.Region;
+import com.amazonaws.services.iot.AWSIotClient;
+import com.amazonaws.services.iot.model.AttachPolicyRequest;
 import com.google.android.material.navigation.NavigationView;
 
-public class SeparateActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener {
-    DrawerLayout drawerLayout;
+public class SeparateActivity extends AppCompatActivity {
+    AWSIotMqttManager mqttManager;
+    boolean backPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_separate);
-        ImageView iv_menu = findViewById(R.id.iv_menu);
-        drawerLayout = findViewById(R.id.drawer_layout);
-        TextView toolbar_name = findViewById(R.id.tvToolbar_name);
-
-        initializeLayout(iv_menu, drawerLayout, toolbar_name, "배출하기");
-        setNavigationViewListener();
-
         Button btnCompSeparate = findViewById(R.id.btnCompSeparate);
 
         btnCompSeparate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SeparateActivity.this, AccumulatePointActivity.class);
-                startActivity(intent);
-                finish();
+                SeparateActivity.MqttTask task = new SeparateActivity.MqttTask();
+                task.execute();
             }
         });
-        ImageView iv_qr = findViewById(R.id.iv_qr);
-        iv_qr.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), QrScanActivity.class);
-            startActivity(intent);
-            finish();
-        });
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        // xml 파일에서 넣어놨던 header 선언
-        View header = navigationView.getHeaderView(0);
-        // header에 있는 리소스 가져오기
-        ImageView logoutBtn = (ImageView) header.findViewById(R.id.ivNavi_logout);
-
-        logoutBtn.setOnClickListener(v -> {
-            AWSMobileClient.getInstance().signOut();
-            Intent i = new Intent(SeparateActivity.this, AuthActivity.class);
-            startActivity(i);
-            finish();
-        });
     }
+
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        startActivity(nextIntent(item, this, drawerLayout));
-        finish();
-        return true;
+    public void onBackPressed() {
+        super.onBackPressed();
+        backPressed = true;
+        SeparateActivity.MqttTask task = new SeparateActivity.MqttTask();
+        task.execute();
     }
 
-    public void setNavigationViewListener() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation);
-        navigationView.setNavigationItemSelectedListener(this);
+    public class MqttTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mqttManager = new AWSIotMqttManager(
+                    "21hi02905c0a1d_app_client",
+                    "a2qfvep4a6xjvp-ats.iot.ap-northeast-2.amazonaws.com");
+            mqttManager.setAutoReconnect(false);
+
+            AttachPolicyRequest attachPolicyReq = new AttachPolicyRequest();
+            attachPolicyReq.setPolicyName("connect_mqtt");
+            attachPolicyReq.setTarget(AWSMobileClient.getInstance().getIdentityId());
+            AWSIotClient mIotAndroidClient = new AWSIotClient(AWSMobileClient.getInstance());
+            mIotAndroidClient.setRegion(Region.getRegion("ap-northeast-2"));
+            mIotAndroidClient.attachPolicy(attachPolicyReq);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            try {
+                mqttManager.connect(AWSMobileClient.getInstance(), new AWSIotMqttClientStatusCallback() {
+                    @Override
+                    public void onStatusChanged(final AWSIotMqttClientStatus status, final Throwable throwable) {
+                        Log.d("yyj", "sep Connection Status: " + status);
+                        if (status.equals(AWSIotMqttClientStatus.Connected)) {
+                            try {
+                                Intent getIntent = getIntent();
+                                mqttManager.publishString("{ \"member\" : \"user\", \"open\" : 0 }", getIntent.getStringExtra("topic"), AWSIotMqttQos.QOS0);
+                                if (!backPressed) {
+                                    Intent intent = new Intent(SeparateActivity.this, AccumulatePointActivity.class);
+                                    intent.putExtra("topic", getIntent.getStringExtra("topic"));
+                                    startActivity(intent);
+                                }
+                                SeparateActivity.this.finish();
+                            } catch (Exception e) {
+                                Log.e("yyj", "Publish error: ", e);
+                            }
+                        }
+                    }
+                });
+            } catch (final Exception e) {
+                Log.e("yyj", "Connection error: ", e);
+            }
+        }
     }
 }
