@@ -96,6 +96,7 @@ public class QnaRegisterActivity extends AppCompatActivity implements Navigation
                     .content(questionContent.getText().toString())
                     .date(String.valueOf(System.currentTimeMillis()))
                     .userId(userId)
+                    .state("미답변")
                     .id(uniqueID)
                     .build();
 

@@ -29,6 +29,7 @@ import com.vaibhavlakhera.circularprogressview.CircularProgressView;
 import org.eazegraph.lib.charts.BarChart;
 import org.eazegraph.lib.models.BarModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class PointConfirmActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface{
@@ -50,7 +51,7 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
 
     BarChart mBarChart;
 
-
+    Handler valueListHandler;
     RecyclerView rRecyclerView;
     UsedPointAdapter upRecyclerAdapter;
     ArrayList<UsedPoint> list;
@@ -106,10 +107,7 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
         });
         getMyPoint(userId);
 
-
         setBarChart();
-
-
 
         rRecyclerView = (RecyclerView)findViewById(R.id.rvUsedPoint);
 
@@ -122,10 +120,8 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
 
         /* adapt data */
         list = new ArrayList<UsedPoint>();
-        for(int i = 1; i <= 10; i++){
-            list.add(new UsedPoint(10000, "환급", "2021.08." + i));
-        }
-        upRecyclerAdapter.setPointList(list);
+        getPointList(userId);
+
     }
 
     private void getMyPoint(String userId){
@@ -148,18 +144,44 @@ public class PointConfirmActivity extends AppCompatActivity implements Navigatio
     private void setBarChart(){
         mBarChart = (BarChart) findViewById(R.id.barchart);
 
-        mBarChart.addBar(new BarModel("12", 300,0xFF56B7F1));
-        mBarChart.addBar(new BarModel("13", 100,  0xFF56B7F1));
-        mBarChart.addBar(new BarModel("14", 130,0xFF56B7F1));
-        mBarChart.addBar(new BarModel("15", 105,0xFF56B7F1));
-        mBarChart.addBar(new BarModel("16",106, 0xFF56B7F1));
-        mBarChart.addBar(new BarModel("17",135, 0xFF56B7F1));
-        mBarChart.addBar(new BarModel("18",235, 0xFF56B7F1));
-        mBarChart.addBar(new BarModel("19",123,  0xFF56B7F1));
-        mBarChart.addBar(new BarModel("20",311,  0xFF56B7F1));
-        mBarChart.addBar(new BarModel("21",453,  0xFF56B7F1));
-        mBarChart.addBar(new BarModel("22",234,  0xFF56B7F1));
+        Amplify.API.query(
+                ModelQuery.list(Point.class, Point.USER_ID.contains(userId)),
+                response -> {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM.dd");
+
+                    for (Point point : response.getData()) {
+                        Log.i("MyAmplifyApp", point.getId());
+                        if(point.getValue() > 0){
+                            mBarChart.addBar(new BarModel(simpleDateFormat.format(Long.valueOf(point.getDate())), point.getValue(),0xFF56B7F1));
+                        }
+                    }
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
+
         mBarChart.startAnimation();
+    }
+
+    public void getPointList(String userId){
+        Amplify.API.query(
+                ModelQuery.list(Point.class, Point.USER_ID.contains(userId)),
+                response -> {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
+                    String content = "";
+                    for (Point point : response.getData()) {
+                        Log.i("MyAmplifyApp", point.getId());
+                        if(point.getValue() > 0){
+                            content = "종이팩 배출";
+                        }else{
+                            content = "환급";
+                        }
+                        list.add(new UsedPoint(point.getValue(), content, simpleDateFormat.format(Long.valueOf(point.getDate()))));
+                    }
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
+
+        upRecyclerAdapter.setPointList(list);
     }
 
     @Override

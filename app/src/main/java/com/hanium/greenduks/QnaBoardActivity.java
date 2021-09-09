@@ -3,6 +3,9 @@ package com.hanium.greenduks;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -16,21 +19,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.amazonaws.mobile.client.AWSMobileClient;
-import com.amplifyframework.AmplifyException;
-import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelQuery;
-import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Answer;
 import com.amplifyframework.datastore.generated.model.Question;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 public class QnaBoardActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface{
+
+    private static final String TAG = "QnaBoardActivity";
 
     ImageView iv_menu;
     DrawerLayout drawerLayout;
     ImageView iv_qr;
 
     Context context;
+
+    TextView questionTitle;
+    TextView questionContent;
+    TextView answer;
+
+    Handler questionHandler;
+    Handler answerHandler;
+
+    ArrayList<String> msgList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,23 +81,73 @@ public class QnaBoardActivity extends AppCompatActivity implements NavigationInt
             finish();
         });
 
+        questionTitle = findViewById(R.id.tvQnaBoard_title);
+        questionContent = findViewById(R.id.tvQnaBoard_question);
+        answer = findViewById(R.id.tvQnaBoard_answer);
+
         context = this.getApplicationContext();
         amplifyInit(context);
-        String userId = AWSMobileClient.getInstance().getUsername();
+        String qid = getIntent().getStringExtra("qid");
+        if(qid != null){
+            Log.d(TAG, "qid: " + qid);
+        }
 
-        getQuestion("qidTest1");
+        msgList = new ArrayList<String>();
+        questionHandler = new Handler(Looper.getMainLooper(), msg -> {
 
+            msgList = (ArrayList<String>) msg.obj;
+
+            questionTitle.setText(msgList.get(0));
+            questionContent.setText(msgList.get(1));
+
+            return false;
+        });
+        getQuestion(qid);
+
+        answerHandler = new Handler(Looper.getMainLooper(), msg -> {
+            if(msg.obj != null) {
+                answer.setText(msg.obj.toString());
+            }
+            return false;
+        });
+        getAnswer(qid);
 
     }
 
-    //
-    private void getQuestion(String id) {
+    private void getQuestion(String qid) {
         Amplify.API.query(
-                ModelQuery.get(Question.class, id),
-                response -> Log.i("aty", ((Question) response.getData()).getContent()),
+                ModelQuery.get(Question.class, qid),
+                response -> {
+                    Log.i("aty", ((Question) response.getData()).getContent());
+
+                    Message turnAlertMsg = new Message();
+
+                    msgList.add(response.getData().getTitle());
+                    msgList.add(response.getData().getContent());
+                    turnAlertMsg.obj = msgList;
+                    questionHandler.sendMessage(turnAlertMsg);
+                    Log.d(TAG, "msgList in getQuestion method: " + msgList);
+                },
                 error -> Log.e("aty", error.toString(), error)
         );
     }
+
+    private void getAnswer(String qid){
+        Amplify.API.query(
+                ModelQuery.list(Answer.class, Answer.QUESTION_ID.contains(qid)),
+                response -> {
+                    Message turnAlertMsg = new Message();
+                    for (Answer answer : response.getData()) {
+                        Log.i("MyAmplifyApp", answer.getContent());
+                        turnAlertMsg.obj = answer.getContent();
+                    }
+                    answerHandler.sendMessage(turnAlertMsg);
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
+    }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

@@ -31,4 +31,5 @@ type Question @model {
   content: String!
   date: String!
   userId: String!
+  state: String!
 }

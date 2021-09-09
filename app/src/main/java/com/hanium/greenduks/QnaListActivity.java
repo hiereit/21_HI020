@@ -2,6 +2,7 @@ package com.hanium.greenduks;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,10 +25,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
-import com.amplifyframework.datastore.generated.model.Answer;
 import com.amplifyframework.datastore.generated.model.Question;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class QnaListActivity extends AppCompatActivity implements NavigationInterface, NavigationView.OnNavigationItemSelectedListener, AmplifyInterface{
@@ -43,19 +45,10 @@ public class QnaListActivity extends AppCompatActivity implements NavigationInte
 
     Context context;
     String userId = "";
-    String state = "";
-    String title = "";
-    String date = "";
-    ArrayList<String> titleList = new ArrayList<>();
-    ArrayList<String> dateList = new ArrayList<>();
-    ArrayList<String> stateList = new ArrayList<>();
 
-    ArrayList<Qna> qnaList = new ArrayList<Qna>();
+    Handler handler;
 
-    Handler getStateHandler;
-    Handler getTitleAndDateHandler;
-    Handler getDateHandler;
-
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,75 +98,49 @@ public class QnaListActivity extends AppCompatActivity implements NavigationInte
 
         /* adapt data */
         list = new ArrayList<Qna>();
+        qRecyclerAdapter.setQnaList(list);
 
-        getTitleAndDateHandler = new Handler(Looper.getMainLooper(), msg -> {
-            title = msg.obj.toString();
+        userId = AWSMobileClient.getInstance().getUsername();
+        handler = new Handler(Looper.getMainLooper(), msg -> {
+            Log.d(TAG, msg.obj.toString());
+            list = (ArrayList<Qna>) msg.obj;
 
-//            Log.d(TAG, "!!!!!!!!!!!!!!!!!!!!!!!titleList: " + titleList);
-//            Log.d(TAG, "!!!!!!!!!!!!!!!!!!!!!!!dateList: " + dateList);
-//
-            Log.d(TAG, "여기가! " + title);
+            qRecyclerAdapter.setQnaList(list);
+
+            qRecyclerAdapter.setOnItemClickListener(new QnaAdapter.ClickListener() {
+                @Override
+                public void onItemClick(int position, View v) {
+                    Intent intent = new Intent(context, QnaBoardActivity.class);
+                    Log.d(TAG, "onItemClick intent --> id: " + list.get(position).getId());
+                    intent.putExtra("qid", list.get(position).getId());
+                    startActivity(intent);
+                    finish();
+                }
+            });
 
             return false;
         });
+        getQuestion(userId);
 
-        setList(userId);
-
-
-        qRecyclerAdapter.setQnaList(list);
     }
 
-    public void setList(String userId){
+    private void getQuestion(String userId) {
         Amplify.API.query(
                 ModelQuery.list(Question.class, Question.USER_ID.contains(userId)),
                 response -> {
-                    Message titleMsg = new Message();
-
-                    getStateHandler = new Handler(Looper.getMainLooper(), msg -> {
-                        state = msg.obj.toString();
-                        stateList.add(state);
-
-                        Log.d(TAG, "!!!!!!!!stateList: " + stateList.toString());
-                        Log.d(TAG, "!!!!!!!!state????: " + state);
-                        return false;
-                    });
+                    Message turnAlertMsg = new Message();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
                     for (Question question : response.getData()) {
-                        Log.i("MyAmplifyApp", question.getTitle());
-
-                        setAnswerState(userId, question.getId());
-
-                        titleList.add(question.getTitle());
-                        dateList.add(question.getDate());
-
-                        list.add(new Qna(state, question.getTitle(), question.getDate()));
-//                        Log.d(TAG, "getStateHandler에서??????????? " + list.toString());
+                        Log.i("MyAmplifyApp", question.getId());
+                        list.add(new Qna(question.getId(), question.getState(), question.getTitle(), simpleDateFormat.format(Long.valueOf(question.getDate()))));
                     }
-                    titleMsg.obj = list;
-                    getTitleAndDateHandler.sendMessage(titleMsg);
+                    turnAlertMsg.obj = list;
+                    handler.sendMessage(turnAlertMsg);
                 },
                 error -> Log.e("MyAmplifyApp", "Query failure", error)
         );
     }
-
-    public void setAnswerState(String userId, String questionId){
-        Amplify.API.query(
-                ModelQuery.get(Answer.class, questionId),
-                response -> {
-                    Message turnAlertMsg = new Message();
-                    if(response.getData() == null){
-                        turnAlertMsg.obj = "미답변";
-                        state = "미답변";
-                    }else{
-                        turnAlertMsg.obj = "답변완료";
-                        state = "답변완료";
-                    }
-                    getStateHandler.sendMessage(turnAlertMsg);
-                },
-                error -> Log.e("MyAmplifyApp", error.toString(), error)
-        );
-    }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

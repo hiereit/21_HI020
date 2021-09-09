@@ -5,6 +5,9 @@ subscription OnCreateBox {
     address
     centerId
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -15,6 +18,9 @@ subscription OnUpdateBox {
     address
     centerId
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -25,6 +31,9 @@ subscription OnDeleteBox {
     address
     centerId
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -33,6 +42,9 @@ subscription OnCreateWeight {
   onCreateWeight {
     id
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -41,6 +53,9 @@ subscription OnUpdateWeight {
   onUpdateWeight {
     id
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -49,6 +64,9 @@ subscription OnDeleteWeight {
   onDeleteWeight {
     id
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -60,6 +78,9 @@ subscription OnCreatePoint {
     date
     value
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -71,6 +92,9 @@ subscription OnUpdatePoint {
     date
     value
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -82,6 +106,9 @@ subscription OnDeletePoint {
     date
     value
     weight
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -92,6 +119,9 @@ subscription OnCreateAnswer {
     questionId
     date
     content
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -102,6 +132,9 @@ subscription OnUpdateAnswer {
     questionId
     date
     content
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -112,6 +145,9 @@ subscription OnDeleteAnswer {
     questionId
     date
     content
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -123,6 +159,10 @@ subscription OnCreateQuestion {
     content
     date
     userId
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -134,6 +174,10 @@ subscription OnUpdateQuestion {
     content
     date
     userId
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -145,6 +189,10 @@ subscription OnDeleteQuestion {
     content
     date
     userId
+    state
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
