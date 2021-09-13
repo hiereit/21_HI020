@@ -81,9 +81,11 @@ public class SeparateActivity extends AppCompatActivity {
                                 Intent getIntent = getIntent();
                                 mqttManager.publishString("{ \"member\" : \"user\", \"open\" : 0 }", getIntent.getStringExtra("topic"), AWSIotMqttQos.QOS0);
                                 if (!backPressed) {
-                                    Intent intent = new Intent(SeparateActivity.this, AccumulatePointActivity.class);
-                                    intent.putExtra("topic", getIntent.getStringExtra("topic"));
-                                    startActivity(intent);
+                                    if (!AWSMobileClient.getInstance().getUsername().equals("som")) {
+                                        Intent intent = new Intent(SeparateActivity.this, AccumulatePointActivity.class);
+                                        intent.putExtra("topic", getIntent.getStringExtra("topic"));
+                                        startActivity(intent);
+                                    }
                                 }
                                 SeparateActivity.this.finish();
                             } catch (Exception e) {

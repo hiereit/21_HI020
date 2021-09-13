@@ -27,9 +27,11 @@ import com.amazonaws.mobile.client.AWSMobileClient;
 import com.amazonaws.mobile.client.Callback;
 import com.amazonaws.mobile.client.UserState;
 import com.amazonaws.mobile.client.UserStateDetails;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Box;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -45,6 +47,16 @@ public class LoginActivity extends AppCompatActivity implements AmplifyInterface
         setContentView(R.layout.activity_login);
 
         amplifyInit(this.getApplicationContext());
+
+        Amplify.API.query(
+                ModelQuery.list(Box.class, Box.ID.contains("testbox1")),
+                response -> {
+                    for (Box todo : response.getData()) {
+                        Log.i("MyAmplifyApp", todo.getCenterId());
+                    }
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
 
         AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
             @Override
