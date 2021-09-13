@@ -48,16 +48,6 @@ public class LoginActivity extends AppCompatActivity implements AmplifyInterface
 
         amplifyInit(this.getApplicationContext());
 
-        Amplify.API.query(
-                ModelQuery.list(Box.class, Box.ID.contains("testbox1")),
-                response -> {
-                    for (Box todo : response.getData()) {
-                        Log.i("MyAmplifyApp", todo.getCenterId());
-                    }
-                },
-                error -> Log.e("MyAmplifyApp", "Query failure", error)
-        );
-
         AWSMobileClient.getInstance().initialize(getApplicationContext(), new Callback<UserStateDetails>() {
             @Override
             public void onResult(UserStateDetails userStateDetails) {
