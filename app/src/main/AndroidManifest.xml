@@ -25,7 +25,7 @@
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation"/>
 
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".AccumulatePointActivity"/>
         <activity android:name=".CenterMainActivity"/>
         <activity android:name=".CollectActivity"/>
@@ -43,7 +43,7 @@
         <activity android:name=".UpdateInformActivity"/>
         <activity android:name=".ConfirmEmailActivity"/>
         <activity android:name=".SignupActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

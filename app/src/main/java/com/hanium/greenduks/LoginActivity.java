@@ -35,8 +35,6 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity implements AmplifyInterface {
-    private String[] members = new String[]{"일반 회원", "수거 업체", "관리자"};
-    private int member;
     EditText etLoginId;
     EditText etLoginPw;
     Handler loginHandler;
@@ -52,8 +50,15 @@ public class LoginActivity extends AppCompatActivity implements AmplifyInterface
             @Override
             public void onResult(UserStateDetails userStateDetails) {
                 if (userStateDetails.getUserState().equals(UserState.SIGNED_IN)) {
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(i);
+                    Class nextActivity;
+                    if (AWSMobileClient.getInstance().getUsername().equals("som")) {
+                        nextActivity = CenterMainActivity.class;
+                    }
+                    else {
+                        nextActivity = MainActivity.class;
+                    }
+                    Intent intent = new Intent(LoginActivity.this, nextActivity);
+                    startActivity(intent);
                     finish();
                 }
             }
@@ -66,22 +71,8 @@ public class LoginActivity extends AppCompatActivity implements AmplifyInterface
 
         etLoginId = findViewById(R.id.etLoginId);
         etLoginPw = findViewById(R.id.etLoginPw);
-        Spinner spinner = findViewById(R.id.spinnerMember);
         Button btnLogin = findViewById(R.id.btnLogin);
         Button btnSignUp = findViewById(R.id.btnSignUp);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, members);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                member = i;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                member = 0;
-            }
-        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,14 +91,11 @@ public class LoginActivity extends AppCompatActivity implements AmplifyInterface
                         result -> {
                             if (result.isSignInComplete()){
                                 Class nextActivity;
-                                if (member == 0) {
-                                    nextActivity = MainActivity.class;
-                                }
-                                else if (member == 1) {
+                                if (AWSMobileClient.getInstance().getUsername().equals("som")) {
                                     nextActivity = CenterMainActivity.class;
                                 }
                                 else {
-                                    nextActivity = QnaListActivity.class;
+                                    nextActivity = MainActivity.class;
                                 }
                                 Intent intent = new Intent(LoginActivity.this, nextActivity);
                                 startActivity(intent);
