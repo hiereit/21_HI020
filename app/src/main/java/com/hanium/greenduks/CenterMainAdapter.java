@@ -55,7 +55,7 @@ public class CenterMainAdapter extends RecyclerView.Adapter<CenterMainAdapter.Vi
         }
 
         void onBind(CenterMain item) {
-            circularProgressView.setProgress(item.getPercentage(), true); //현재 value
+            circularProgressView.setProgress((int) item.getWeight(), true); //현재 value
             addr.setText(item.getAddr());
             boxId.setText(String.valueOf(item.getBoxId()));
         }

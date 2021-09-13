@@ -1,24 +1,24 @@
 package com.hanium.greenduks;
 
 public class CenterMain {
-    private int percentage;
+    private double weight;
     private String addr;
-    private int boxId;
+    private String boxId;
 
     public CenterMain(){}
 
-    public CenterMain(int percentage, String addr, int boxId) {
-        this.percentage = percentage;
+    public CenterMain(double weight, String addr, String boxId) {
+        this.weight = weight;
         this.addr = addr;
         this.boxId = boxId;
     }
 
-    public int getPercentage() {
-        return percentage;
+    public double getWeight() {
+        return weight;
     }
 
-    public void setPercentage(int percentage) {
-        this.percentage = percentage;
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 
     public String getAddr() {
@@ -29,11 +29,11 @@ public class CenterMain {
         this.addr = addr;
     }
 
-    public int getBoxId() {
+    public String getBoxId() {
         return boxId;
     }
 
-    public void setBoxId(int boxId) {
+    public void setBoxId(String boxId) {
         this.boxId = boxId;
     }
 }
